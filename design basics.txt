@@ -1,0 +1,51 @@
+domain:
+	maze
+		node(s)
+		line(s)
+		obstacle_square(s)
+		begin 1..n (node)
+		end 1..n (node)
+		prev\
+			 --> which layer?
+		next/
+		type(s) --> enum
+			symmetry --> boolean
+				OR
+			extra: sound --> boolean
+		max_width
+		max_height
+		
+	puzzle_type
+		name
+		background_color
+		???
+		
+	node
+		obstacle
+		x
+		y
+		
+	line
+		begin (node)
+		end (node)
+		obstacle
+		
+	obstacle_square
+		nodes
+		obstacle
+			
+	pathway
+		line(s)
+		consistent --> boolean
+			if consistent: complete --> boolean
+				if complete: correct --> boolean
+				
+	obstacle
+		type
+				
+extra:
+	sound puzzles
+	the challenge
+	time attack
+		--> with high score
+		--> random puzzle type series OR mix OR all
