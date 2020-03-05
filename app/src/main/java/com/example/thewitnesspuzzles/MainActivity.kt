@@ -29,24 +29,36 @@ class MainActivity : AppCompatActivity() {
         var left = 100
         var top = 100
         var right = 600
-        var bottom = 400
+        var bottom = 200
 
         // draw rectangle shape to canvas
         shapeDrawable = ShapeDrawable(RectShape())
         shapeDrawable.setBounds( left, top, right, bottom)
-        shapeDrawable.getPaint().setColor(Color.parseColor("#009944"))
+        shapeDrawable.getPaint().setColor(Color.YELLOW)
         shapeDrawable.draw(canvas)
 
         // oval positions
         left = 100
         top = 500
-        right = 600
-        bottom = 800
+        right = 200
+        bottom = 600
 
         // draw oval shape to canvas
         shapeDrawable = ShapeDrawable(OvalShape())
         shapeDrawable.setBounds( left, top, right, bottom)
-        shapeDrawable.getPaint().setColor(Color.parseColor("#009191"))
+        shapeDrawable.getPaint().setColor(Color.YELLOW)
+        shapeDrawable.draw(canvas)
+
+        // oval positions
+        left = 300
+        top = 500
+        right = 500
+        bottom = 600
+
+        // draw oval shape to canvas
+        shapeDrawable = ShapeDrawable(OvalShape())
+        shapeDrawable.setBounds( left, top, right, bottom)
+        shapeDrawable.getPaint().setColor(Color.YELLOW)
         shapeDrawable.draw(canvas)
 
         // now bitmap holds the updated pixels
