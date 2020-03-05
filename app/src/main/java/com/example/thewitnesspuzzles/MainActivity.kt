@@ -11,6 +11,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.graphics.drawable.shapes.RectShape
+import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageView;
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,6 +22,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         draw();
+        touch();
+    }
+
+    fun touch() {
+        this.imageView.setOnTouchListener(View.OnTouchListener { _, event ->
+            val x = event.x
+            val y = event.y
+
+            when(event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    println("ACTION_DOWN \nx: $x\ny: $y")
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    //println("ACTION_MOVE \nx: $x\ny: $y")
+                }
+                MotionEvent.ACTION_UP -> {
+                    println("ACTION_UP \nx: $x\ny: $y")
+                }
+            }
+            return@OnTouchListener  true
+        })
     }
     fun draw() {
         val bitmap: Bitmap = Bitmap.createBitmap(700, 1000, Bitmap.Config.ARGB_8888)
