@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        draw();
+    }
+    fun draw() {
         val bitmap: Bitmap = Bitmap.createBitmap(700, 1000, Bitmap.Config.ARGB_8888)
         val canvas: Canvas = Canvas(bitmap)
 
@@ -65,6 +67,5 @@ class MainActivity : AppCompatActivity() {
 
         // set bitmap as background to ImageView
         imageView.background = BitmapDrawable(getResources(), bitmap)
-
     }
 }
