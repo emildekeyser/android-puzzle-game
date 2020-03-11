@@ -13,6 +13,8 @@ import android.graphics.drawable.shapes.OvalShape
 import android.graphics.drawable.shapes.RectShape
 import android.icu.lang.UCharacter
 import android.os.Build
+import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageView;
 import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,6 +35,28 @@ class MainActivity : AppCompatActivity() {
         val bitmap = drawPuzzle(screenWidth, screenHeight)
         imageView.background = BitmapDrawable(resources, bitmap)
 
+        touch();
+    }
+
+    fun touch() {
+        this.imageView.setOnTouchListener(View.OnTouchListener { _, event ->
+            val x = event.x
+            val y = event.y
+
+            when(event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    println("ACTION_DOWN \nx: $x\ny: $y")
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    //println("ACTION_MOVE \nx: $x\ny: $y")
+                }
+                MotionEvent.ACTION_UP -> {
+                    println("ACTION_UP \nx: $x\ny: $y")
+                }
+            }
+            return@OnTouchListener true
+        })
+
     }
 
     fun drawPuzzle(screenWidth: Int, screenHeight: Int): Bitmap{
@@ -48,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         // this will get called in a loop:
         val endNode = Pair(1, 0) // (x, y)
-        val endPoint = calculatePoint(startPoint, endNode.first, endNode.second, unit)
+//        val endPoint = calculatePoint(startPoint, endNode.first, endNode.second, unit)
 
         // Draw path
 
@@ -91,5 +115,4 @@ class MainActivity : AppCompatActivity() {
         return Pair(x, y)
     }
 
-    Cal
 }
