@@ -1,9 +1,9 @@
 package com.example.thewitnesspuzzles
 
-class Line( _begin:Node, _end : Node, _obstacle :Boolean) {
-    var begin : Node = _begin
-    var end : Node = _end
-    var obstacle : Boolean = _obstacle
+class Line(_begin: Node, _end: Node, _obstacle: Boolean) {
+    var begin: Node = _begin
+    var end: Node = _end
+    var obstacle: Boolean = _obstacle
 
 
     override fun equals(other: Any?): Boolean {
@@ -18,7 +18,7 @@ class Line( _begin:Node, _end : Node, _obstacle :Boolean) {
         }
         if (end != other.end) {
             if (end != other.begin)
-            return false
+                return false
         }
         if (obstacle != other.obstacle) return false
 
