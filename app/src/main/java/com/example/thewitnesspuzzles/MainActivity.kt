@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.graphics.drawable.shapes.RectShape
+import android.icu.lang.UCharacter
 import android.os.Build
 import android.widget.ImageView;
 import androidx.annotation.RequiresApi
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val bitmap = drawPuzzle(screenWidth, screenHeight)
         imageView.background = BitmapDrawable(resources, bitmap)
+
     }
 
     fun drawPuzzle(screenWidth: Int, screenHeight: Int): Bitmap{
@@ -38,36 +40,56 @@ class MainActivity : AppCompatActivity() {
         val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
         val canvas: Canvas = Canvas(bitmap)
 
+        val maxHorizontalNodes = 2
+        val maxVerticalNodes = 1
+        val unit = screenWidth * 0.6f / (maxHorizontalNodes - 1)
+
+        val startPoint = calculateZero(screenWidth, screenHeight, unit, maxVerticalNodes)
+
+        // this will get called in a loop:
+        val endNode = Pair(1, 0) // (x, y)
+        val endPoint = calculatePoint(startPoint, endNode.first, endNode.second, unit)
+
         // Draw path
 
-        val pathThickness = screenWidth * 0.05f
-        val pathLength = screenWidth * 0.6f
-
-        var left = screenWidth * 0.2f
-        var top = screenHeight / 2 - pathThickness / 2
-        var right = left + pathLength
-        var bottom = top + pathThickness
-
-        val paint = Paint()
-        paint.setColor(Color.YELLOW)
-
-        canvas.drawRect(left, top, right, bottom, paint)
-
-        // Draw start
-
-        var radius = pathThickness
-        var x = left
-        var y = top + pathThickness / 2
-
-        canvas.drawCircle(x, y, radius, paint)
-
-        // Draw end
-
-        radius = pathThickness / 2
-        x = right
-
-        canvas.drawCircle(x, y, radius, paint)
+//        val pathThickness = screenWidth * 0.05f
+//        val pathLength = screenWidth * 0.6f
+//
+//        var left = screenWidth * 0.2f
+//        var top = screenHeight / 2 - pathThickness / 2
+//        var right = left + pathLength
+//        var bottom = top + pathThickness
+//
+//        val paint = Paint()
+//        paint.setColor(Color.YELLOW)
+//
+//        canvas.drawRect(left, top, right, bottom, paint)
+//
+//        // Draw start
+//
+//        var radius = pathThickness
+//        var x = left
+//        var y = top + pathThickness / 2
+//
+//        canvas.drawCircle(x, y, radius, paint)
+//
+//        // Draw end
+//
+//        radius = pathThickness / 2
+//        x = right
+//
+//        canvas.drawCircle(x, y, radius, paint)
 
         return bitmap;
     }
+
+    fun calculateZero(screenWidth: Int, screenHeight: Int, unit: Float, maxVerticalNodes: Int): Pair<Float, Float> {
+
+        var x = screenWidth * 0.2f
+        val offset = unit * (maxVerticalNodes - 1) / 2f
+        var y = screenHeight / 2 - offset
+        return Pair(x, y)
+    }
+
+    Cal
 }
