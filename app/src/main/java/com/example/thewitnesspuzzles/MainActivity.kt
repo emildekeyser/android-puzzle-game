@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var puzzle = Unit // = null ==> wordt later: Puzzles.makePuzzle()
+        var puzzle = Unit // = null ==> wordt later: Puzzles.makePuzzle() // TODO
         val renderer = Renderer(imageView, resources)
         var overlord = Overlord(renderer, puzzle)
 

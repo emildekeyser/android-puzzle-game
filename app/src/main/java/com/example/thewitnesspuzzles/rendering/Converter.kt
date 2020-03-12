@@ -9,6 +9,8 @@ class Converter(
     val colorPallete: ColorPallete
 ) {
 
+    // TODO: dit maakt nu een hardcoded zwarte dildo, refactor is nodig
+    // evt.: beginnen met hen hoekige dildo te maken om middle nodes te testen
     fun convertPuzzle(puzzleData: Unit):
             Pair<Map<RenderableNode, Node>, Map<RenderableLine, Unit>> {
 
