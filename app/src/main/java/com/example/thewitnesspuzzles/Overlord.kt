@@ -12,7 +12,10 @@ class Overlord(val renderer: Renderer, val puzzle: Unit) {
         renderer.render(puzzle)
     }
     fun gameUpdate(input: Pair<Float, Float>) {
-//        touchedPuzzleData = renderer.getTouched(input)
+        val touchedNode = renderer.getTouched(input)
+        println("---------")
+        println(input)
+        println(touchedNode)
 //        updatedPuzzleData = puzzle.getUpdate(touched) // TODO
 //        renderer.render(updatedPuzzleData) // TODO
 //        if(puzzle.victorious()){ // TODO

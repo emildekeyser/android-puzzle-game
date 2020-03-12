@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         var overlord = Overlord(renderer, puzzle)
 
         this.imageView.setOnTouchListener(View.OnTouchListener { _, event ->
+//            this.imageView.layoutParams.width = 1080
+//            this.imageView.layoutParams.height = 1920
             val input = Pair(event.x, event.y)
             if(event.action == MotionEvent.ACTION_UP){
                 overlord.gameUpdate(input)

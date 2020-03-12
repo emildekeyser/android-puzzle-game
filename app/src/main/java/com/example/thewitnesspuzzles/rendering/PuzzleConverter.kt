@@ -3,7 +3,7 @@ package com.example.thewitnesspuzzles.rendering
 import com.example.thewitnesspuzzles.Node
 import com.example.thewitnesspuzzles.NodeType
 
-class Converter(
+class PuzzleConverter(
     val screenWidth: Int,
     val screenHeight: Int,
     val colorPallete: ColorPallete
@@ -11,6 +11,7 @@ class Converter(
 
     // TODO: dit maakt nu een hardcoded zwarte dildo, refactor is nodig
     // evt.: beginnen met hen hoekige dildo te maken om middle nodes te testen
+    // middle nodes moeten ook een radius hebben om te kunnen touchen
     fun convertPuzzle(puzzleData: Unit):
             Pair<Map<RenderableNode, Node>, Map<RenderableLine, Unit>> {
 
@@ -44,5 +45,10 @@ class Converter(
             absoluteLine to relativeline
         )
         return Pair(nodeMap, lineMap)
+    }
+
+    fun nodes(): Map<RenderableNode, Node> {
+        val (nodeMap, _) = this.convertPuzzle(Unit) // TODO
+        return nodeMap
     }
 }

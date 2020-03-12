@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import com.example.thewitnesspuzzles.Line
 import com.example.thewitnesspuzzles.Node
 
 class Renderer(
@@ -19,11 +20,11 @@ class Renderer(
     // val screenWidth = imageView.width
     // val screenHeight = imageView.height
     private val screenWidth = 1080
-    private val screenHeight = 1920
+    private val screenHeight = 1580 // !! Omdat er nog een titel banner is !!
     private val colorPallete = ColorPallete()
     private val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
     private val canvas: Canvas = Canvas(bitmap)
-    private val converter = Converter(this.screenWidth, this.screenHeight, this.colorPallete)
+    private val converter = PuzzleConverter(this.screenWidth, this.screenHeight, this.colorPallete)
 
     init {
         colorPallete.disabledPaint.setColor(Color.BLACK)
@@ -47,8 +48,16 @@ class Renderer(
         }
     }
 
+    fun getTouched(input: Pair<Float, Float>): Node? {
+        return IntersctionCalculator().calculateTouched(converter.nodes(), input)
+    }
+
 }
 
 class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint) {}
-class RenderableNode(var x: Float, var y: Float, var nodeRadius: Float, var paint: Paint) {}
+class RenderableNode(var x: Float, var y: Float, var nodeRadius: Float, var paint: Paint) {
+    override fun toString(): String {
+        return "RENDERABLE_NODE: x:${x}, y:${y}, radius:${nodeRadius}, color:${paint.color}"
+    }
+}
 
