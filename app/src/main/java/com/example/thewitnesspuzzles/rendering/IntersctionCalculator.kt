@@ -21,11 +21,6 @@ class IntersctionCalculator {
         val isAbove = (y <= node.y + r)
         val isRightOf = (x >= node.x - r)
         val isLeftOf = (x <= node.x + r)
-        println(node)
-        println("isBelow: ${isBelow }")
-        println("isAbove: ${isAbove }")
-        println("isRightOf: ${isRightOf}")
-        println("isLeftOf: ${isLeftOf}")
         return isAbove && isBelow && isLeftOf && isRightOf
     }
 }

@@ -1,8 +1,6 @@
 package com.example.thewitnesspuzzles
 
 import android.os.Build
-import android.view.MotionEvent
-import android.view.View
 import androidx.annotation.RequiresApi
 import com.example.thewitnesspuzzles.rendering.Renderer
 
@@ -13,10 +11,8 @@ class Overlord(val renderer: Renderer, val puzzle: Unit) {
     }
     fun gameUpdate(input: Pair<Float, Float>) {
         val touchedNode = renderer.getTouched(input)
-        println("---------")
-        println(input)
-        println(touchedNode)
 //        updatedPuzzleData = puzzle.getUpdate(touched) // TODO
+        renderer.fakeRender(touchedNode) // Fake
 //        renderer.render(updatedPuzzleData) // TODO
 //        if(puzzle.victorious()){ // TODO
 //           // end game // TODO

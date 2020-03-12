@@ -9,7 +9,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
-import com.example.thewitnesspuzzles.Line
 import com.example.thewitnesspuzzles.Node
 
 class Renderer(
@@ -34,7 +33,7 @@ class Renderer(
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     fun render(puzzleData: Unit) {
-        val (nodeMap, lineMap) = converter.convertPuzzle(puzzleData)
+        val (nodeMap, lineMap) = converter.convertPuzzle(null)
         this.drawPuzzle(nodeMap, lineMap)
         imageView.background = BitmapDrawable(resources, bitmap)
     }
@@ -50,6 +49,13 @@ class Renderer(
 
     fun getTouched(input: Pair<Float, Float>): Node? {
         return IntersctionCalculator().calculateTouched(converter.nodes(), input)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    fun fakeRender(touchedNode: Node?) {
+        val (nodeMap, lineMap) = converter.convertPuzzle(touchedNode)
+        this.drawPuzzle(nodeMap, lineMap)
+        imageView.background = BitmapDrawable(resources, bitmap)
     }
 
 }
