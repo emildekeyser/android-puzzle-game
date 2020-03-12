@@ -12,7 +12,7 @@ class PuzzleConverter(
     // TODO: dit maakt nu een hardcoded zwarte dildo, refactor is nodig
     // evt.: beginnen met hen hoekige dildo te maken om middle nodes te testen
     // middle nodes moeten ook een radius hebben om te kunnen touchen
-    fun convertPuzzle(puzzleData: Node?):
+    fun convertPuzzle(puzzleData: Node?): // dit moet eigenlijk een lijsten met nodes en paden zijn
             Pair<Map<RenderableNode, Node>, Map<RenderableLine, Unit>> {
 
         /// FAKE
