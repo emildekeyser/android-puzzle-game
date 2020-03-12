@@ -17,6 +17,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView;
 import androidx.annotation.RequiresApi
+import com.example.thewitnesspuzzles.rendering.Renderer
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,10 +33,26 @@ class MainActivity : AppCompatActivity() {
         val screenWidth = 1080
         val screenHeight = 1920
 
-        val bitmap = drawPuzzle(screenWidth, screenHeight)
+        /// STUB
+//
+//        var chosenPuzzle = getChosen()
+//        var puzzle: Puzzle(chosenPuzzle)
+//        var renderer: Renderer(puzzle)
+//
+//        while(puzzle.noVictory())
+//        {
+//            touchedNode = renderer.getTouchedNode(input.touchedLocation())
+//            puzzle.update(touchedNode)
+//            renderer.render(puzzle)
+//        }
+//
+        /// ENDSTUB
+
+        val renderer = Renderer()
+        val bitmap = renderer.drawPuzzle(screenWidth, screenHeight, Color.BLACK, Color.RED)
         imageView.background = BitmapDrawable(resources, bitmap)
 
-        touch();
+//        touch();
     }
 
     fun touch() {
@@ -58,61 +75,4 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-
-    fun drawPuzzle(screenWidth: Int, screenHeight: Int): Bitmap{
-
-        val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
-        val canvas: Canvas = Canvas(bitmap)
-
-        val maxHorizontalNodes = 2
-        val maxVerticalNodes = 1
-        val unit = screenWidth * 0.6f / (maxHorizontalNodes - 1)
-
-        val startPoint = calculateZero(screenWidth, screenHeight, unit, maxVerticalNodes)
-
-        // this will get called in a loop:
-        val endNode = Pair(1, 0) // (x, y)
-//        val endPoint = calculatePoint(startPoint, endNode.first, endNode.second, unit)
-
-        // Draw path
-
-//        val pathThickness = screenWidth * 0.05f
-//        val pathLength = screenWidth * 0.6f
-//
-//        var left = screenWidth * 0.2f
-//        var top = screenHeight / 2 - pathThickness / 2
-//        var right = left + pathLength
-//        var bottom = top + pathThickness
-//
-//        val paint = Paint()
-//        paint.setColor(Color.YELLOW)
-//
-//        canvas.drawRect(left, top, right, bottom, paint)
-//
-//        // Draw start
-//
-//        var radius = pathThickness
-//        var x = left
-//        var y = top + pathThickness / 2
-//
-//        canvas.drawCircle(x, y, radius, paint)
-//
-//        // Draw end
-//
-//        radius = pathThickness / 2
-//        x = right
-//
-//        canvas.drawCircle(x, y, radius, paint)
-
-        return bitmap;
-    }
-
-    fun calculateZero(screenWidth: Int, screenHeight: Int, unit: Float, maxVerticalNodes: Int): Pair<Float, Float> {
-
-        var x = screenWidth * 0.2f
-        val offset = unit * (maxVerticalNodes - 1) / 2f
-        var y = screenHeight / 2 - offset
-        return Pair(x, y)
-    }
-
 }
