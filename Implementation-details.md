@@ -7,7 +7,7 @@ In back-end keep nodes positive and work in multitudes of 1. Front-end will dyna
 - Set of Line objects
 - Id
 - Path (that the user has taken)
-!- Last pressed node  // zit in path
+- Last pressed node  // zit in path
 
 ### Methods
 - GetAllLines() returns a set of lines
