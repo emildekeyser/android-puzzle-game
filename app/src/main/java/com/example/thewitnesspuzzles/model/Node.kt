@@ -34,10 +34,10 @@ class Node(
         result = 31 * result + dot.hashCode()
         return result
     }
-    
+
     @RequiresApi(Build.VERSION_CODES.N)
-    fun reachableBy(other: Node): Boolean {
-        if (xPos == other.xPos) {
+    fun isAdjacent(other: Node): Boolean {
+        if(xPos == other.xPos){
             if ((max(yPos, other.yPos) - min(yPos, other.yPos)) == 1)
                 return true
         }
