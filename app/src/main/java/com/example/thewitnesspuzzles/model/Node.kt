@@ -34,16 +34,15 @@ class Node(
         result = 31 * result + dot.hashCode()
         return result
     }
-
-
+    
     @RequiresApi(Build.VERSION_CODES.N)
     fun reachableBy(other: Node): Boolean {
-        if(xPos == other.xPos){
-            if ((max(yPos,other.yPos)-min(yPos,other.yPos)) == 1)
+        if (xPos == other.xPos) {
+            if ((max(yPos, other.yPos) - min(yPos, other.yPos)) == 1)
                 return true
         }
-        if(yPos == other.yPos){
-            if ((max(xPos,other.xPos)-min(xPos,other.xPos)) == 1)
+        if (yPos == other.yPos) {
+            if ((max(xPos, other.xPos) - min(xPos, other.xPos)) == 1)
                 return true
         }
         return false
