@@ -1,9 +1,9 @@
 package com.example.thewitnesspuzzles.model
 
 class Line(_begin: Node, _end: Node, _dot: Boolean) {
-    var begin: Node = _begin
-    var end: Node = _end
-    var dot: Boolean = _dot
+    val begin: Node = _begin
+    val end: Node = _end
+    val dot: Boolean = _dot
 
 
     override fun equals(other: Any?): Boolean {
