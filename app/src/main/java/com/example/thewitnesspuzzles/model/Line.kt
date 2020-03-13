@@ -1,10 +1,6 @@
 package com.example.thewitnesspuzzles.model
 
-class Line(_begin: Node, _end: Node, _dot: Boolean) {
-    val begin: Node = _begin
-    val end: Node = _end
-    val dot: Boolean = _dot
-
+class Line(val begin: Node, val end: Node, val dot: Boolean, var enabled: Boolean = false) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -20,6 +16,7 @@ class Line(_begin: Node, _end: Node, _dot: Boolean) {
             if (end != other.begin)
                 return false
         }
+        if (enabled != other.enabled) return false
         if (dot != other.dot) return false
 
         return true
@@ -31,6 +28,4 @@ class Line(_begin: Node, _end: Node, _dot: Boolean) {
         result = 31 * result + dot.hashCode()
         return result
     }
-
-
 }
