@@ -28,4 +28,9 @@ class Line(val begin: Node, val end: Node, val dot: Boolean, var taken: Boolean 
         result = 31 * result + dot.hashCode()
         return result
     }
+
+    fun containsNode(coordinates: Pair<Int, Int>): Boolean {
+        return begin.hasMatchingCoordinates(coordinates)
+                || end.hasMatchingCoordinates(coordinates)
+    }
 }

@@ -34,7 +34,7 @@ class Node(
         result = 31 * result + dot.hashCode()
         return result
     }
-    
+
     @RequiresApi(Build.VERSION_CODES.N)
     fun reachableBy(other: Node): Boolean {
         if (xPos == other.xPos) {
@@ -46,5 +46,10 @@ class Node(
                 return true
         }
         return false
+    }
+
+    fun hasMatchingCoordinates(coordinates: Pair<Int, Int>): Boolean {
+        val (x, y) = coordinates;
+        return xPos == x && yPos == y
     }
 }
