@@ -9,7 +9,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
-import com.example.thewitnesspuzzles.Node
+import com.example.thewitnesspuzzles.model.Node
 
 class Renderer(
     val imageView: ImageView,

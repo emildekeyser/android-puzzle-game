@@ -1,4 +1,4 @@
-package com.example.thewitnesspuzzles
+package com.example.thewitnesspuzzles.model
 
 class Line(_begin: Node, _end: Node, _dot: Boolean) {
     var begin: Node = _begin

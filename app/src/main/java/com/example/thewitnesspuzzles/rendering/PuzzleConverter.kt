@@ -1,7 +1,7 @@
 package com.example.thewitnesspuzzles.rendering
 
-import com.example.thewitnesspuzzles.Node
-import com.example.thewitnesspuzzles.NodeType
+import com.example.thewitnesspuzzles.model.Node
+import com.example.thewitnesspuzzles.model.NodeType
 
 class PuzzleConverter(
     private val screenWidth: Int,
@@ -37,7 +37,8 @@ class PuzzleConverter(
         val y = screenHeight / 2f
 //        val absoluteStart = RenderableNode(x, y, startNodeRadius, colorPallete.disabledPaint)
         val absoluteStart = RenderableNode(x, y, startNodeRadius, startcolor) // FAKE
-        val relativeStart = Node(0, 0, NodeType.START)
+        val relativeStart =
+            Node(0, 0, NodeType.START)
 
         val left = x
         val top = y - lineThickness / 2
@@ -51,7 +52,8 @@ class PuzzleConverter(
 //        y = screenHeight / 2f  => same
 //        val absoluteEnd = RenderableNode(x, y, endNodeRadius, colorPallete.disabledPaint)
         val absoluteEnd = RenderableNode(x, y, endNodeRadius, lineAndEndColor)
-        val relativeEnd = Node(0, 0, NodeType.END)
+        val relativeEnd =
+            Node(0, 0, NodeType.END)
 
         val nodeMap = mapOf(
             absoluteStart to relativeStart,

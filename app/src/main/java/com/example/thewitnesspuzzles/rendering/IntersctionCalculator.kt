@@ -1,6 +1,6 @@
 package com.example.thewitnesspuzzles.rendering
 
-import com.example.thewitnesspuzzles.Node
+import com.example.thewitnesspuzzles.model.Node
 
 class IntersctionCalculator {
     fun calculateTouched(

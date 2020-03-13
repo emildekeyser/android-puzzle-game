@@ -1,4 +1,4 @@
-package com.example.thewitnesspuzzles
+package com.example.thewitnesspuzzles.model
 
 class Node(_xPos: Int, _yPos: Int, _nodeType: NodeType, _dot: Boolean) {
     constructor(_xPos: Int, _yPos: Int, _nodeType: NodeType) : this(_xPos, _yPos, _nodeType, false)
@@ -7,7 +7,7 @@ class Node(_xPos: Int, _yPos: Int, _nodeType: NodeType, _dot: Boolean) {
     var xPos: Int = _xPos
     var yPos: Int = _yPos
     var nodeType = _nodeType
-    var dot: Boolean = _dot;
+    var dot: Boolean = _dot
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

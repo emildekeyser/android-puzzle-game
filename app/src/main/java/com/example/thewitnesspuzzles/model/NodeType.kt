@@ -1,4 +1,4 @@
-package com.example.thewitnesspuzzles
+package com.example.thewitnesspuzzles.model
 
 enum class NodeType {
     START,
