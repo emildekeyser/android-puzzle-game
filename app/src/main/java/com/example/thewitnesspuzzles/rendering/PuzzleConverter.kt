@@ -38,7 +38,7 @@ class PuzzleConverter(
 //        val absoluteStart = RenderableNode(x, y, startNodeRadius, colorPallete.disabledPaint)
         val absoluteStart = RenderableNode(x, y, startNodeRadius, startcolor) // FAKE
         val relativeStart =
-            Node(0, 0, NodeType.START)
+            Node(0, 0, NodeType.START, false)
 
         val left = x
         val top = y - lineThickness / 2
@@ -53,7 +53,7 @@ class PuzzleConverter(
 //        val absoluteEnd = RenderableNode(x, y, endNodeRadius, colorPallete.disabledPaint)
         val absoluteEnd = RenderableNode(x, y, endNodeRadius, lineAndEndColor)
         val relativeEnd =
-            Node(0, 0, NodeType.END)
+            Node(0, 0, NodeType.END, false)
 
         val nodeMap = mapOf(
             absoluteStart to relativeStart,

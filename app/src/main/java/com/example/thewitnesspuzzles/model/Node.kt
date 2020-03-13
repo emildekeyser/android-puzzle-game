@@ -1,13 +1,12 @@
 package com.example.thewitnesspuzzles.model
 
-class Node(_xPos: Int, _yPos: Int, _nodeType: NodeType, _dot: Boolean) {
-    constructor(_xPos: Int, _yPos: Int, _nodeType: NodeType) : this(_xPos, _yPos, _nodeType, false)
-
-    val enabled = false
-    val xPos: Int = _xPos
-    val yPos: Int = _yPos
-    val nodeType = _nodeType
-    val dot: Boolean = _dot
+class Node(
+    val xPos: Int,
+    val yPos: Int,
+    val nodeType: NodeType,
+    val dot: Boolean,
+    var enabled: Boolean = false
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
