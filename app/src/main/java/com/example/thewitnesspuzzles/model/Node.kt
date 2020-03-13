@@ -5,7 +5,7 @@ class Node(
     val yPos: Int,
     val nodeType: NodeType,
     val dot: Boolean,
-    var enabled: Boolean = false
+    var taken: Boolean = false
 ) {
 
     override fun equals(other: Any?): Boolean {
@@ -17,7 +17,7 @@ class Node(
         if (xPos != other.xPos) return false
         if (yPos != other.yPos) return false
         if (nodeType != other.nodeType) return false
-        if (enabled != other.enabled) return false
+        if (taken != other.taken) return false
         if (dot != other.dot) return false
 
         return true
