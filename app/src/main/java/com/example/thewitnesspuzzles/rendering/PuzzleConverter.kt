@@ -1,5 +1,6 @@
 package com.example.thewitnesspuzzles.rendering
 
+import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
 
@@ -12,21 +13,15 @@ class PuzzleConverter(
     // TODO: dit maakt nu een hardcoded zwarte dildo, refactor is nodig
     // evt.: beginnen met hen hoekige dildo te maken om middle nodes te testen
     // middle nodes moeten ook een radius hebben om te kunnen touchen
-    fun convertPuzzle(puzzleData: Node?): // dit moet eigenlijk een lijsten met nodes en paden zijn
+    fun convertPuzzle(puzzleData: List<Line>):
             Pair<Map<RenderableNode, Node>, Map<RenderableLine, Unit>> {
+        return fake()
+    }
 
-        /// FAKE
+    // hardcoded
+    fun fake(): Pair<Map<RenderableNode, Node>, Map<RenderableLine, Unit>> {
         var startcolor = colorPallete.disabledPaint
         var lineAndEndColor = colorPallete.disabledPaint
-        if(puzzleData != null){
-            if (puzzleData.nodeType == NodeType.START ){
-                startcolor = colorPallete.enabledPaint
-            }
-            if (puzzleData.nodeType == NodeType.END){
-                lineAndEndColor = colorPallete.enabledPaint
-            }
-        }
-        /// FAKE
 
         val lineThickness = screenWidth * 0.05f
         val startNodeRadius = lineThickness
@@ -65,8 +60,9 @@ class PuzzleConverter(
         return Pair(nodeMap, lineMap)
     }
 
+    // get from cache ?
     fun nodes(): Map<RenderableNode, Node> {
-        val (nodeMap, _) = this.convertPuzzle(null) // TODO
+        val (nodeMap, _) = this.convertPuzzle(listOf()) // TODO
         return nodeMap
     }
 }

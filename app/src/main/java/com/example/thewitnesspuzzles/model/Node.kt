@@ -9,7 +9,7 @@ class Node(
     val xPos: Int,
     val yPos: Int,
     val nodeType: NodeType,
-    val dot: Boolean,
+    val dot: Boolean = false,
     var taken: Boolean = false
 ) {
 

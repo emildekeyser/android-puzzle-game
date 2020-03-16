@@ -6,6 +6,10 @@ import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
+import com.example.thewitnesspuzzles.model.Line
+import com.example.thewitnesspuzzles.model.Maze
+import com.example.thewitnesspuzzles.model.Node
+import com.example.thewitnesspuzzles.model.NodeType
 import com.example.thewitnesspuzzles.rendering.Renderer
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var puzzle = Unit // = null ==> wordt later: Puzzles.makePuzzle() // TODO
+        var maze = makeDildo() // = mazeService.makeMaze(0) // TODO
         val renderer = Renderer(imageView, resources)
-        var overlord = Overlord(renderer, puzzle)
+        var overlord = Overlord(renderer, maze)
 
         this.imageView.setOnTouchListener(View.OnTouchListener { _, event ->
 //            this.imageView.layoutParams.width = 1080
@@ -32,6 +36,13 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+}
+
+fun makeDildo(): Maze {
+    val start = Node(0, 0, NodeType.START)
+    val end = Node(0, 0, NodeType.END)
+    val line = Line(start, end)
+    return Maze(0, setOf(line))
 }
 
 

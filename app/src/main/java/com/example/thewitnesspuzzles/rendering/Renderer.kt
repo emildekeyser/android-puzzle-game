@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Node
 
 class Renderer(
@@ -32,32 +33,24 @@ class Renderer(
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    fun render(puzzleData: Unit) {
-        val (nodeMap, lineMap) = converter.convertPuzzle(null)
+    fun render(mazeData: List<Line>) {
+        val (nodeMap, lineMap) = converter.convertPuzzle(mazeData)
         this.drawPuzzle(nodeMap, lineMap)
         imageView.background = BitmapDrawable(resources, bitmap)
     }
 
     private fun drawPuzzle(nodeMap: Map<RenderableNode, Node>, lineMap: Map<RenderableLine, Unit>){
-        for (node in nodeMap.keys) {
-            canvas.drawCircle(node.x, node.y, node.nodeRadius, node.paint)
-        }
         for (line in lineMap.keys) {
             canvas.drawRect(line.left, line.top, line.right, line.bottom, line.paint)
+        }
+        for (node in nodeMap.keys) {
+            canvas.drawCircle(node.x, node.y, node.nodeRadius, node.paint)
         }
     }
 
     fun getTouched(input: Pair<Float, Float>): Node? {
         return IntersctionCalculator().calculateTouched(converter.nodes(), input)
     }
-
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    fun fakeRender(touchedNode: Node?) {
-        val (nodeMap, lineMap) = converter.convertPuzzle(touchedNode)
-        this.drawPuzzle(nodeMap, lineMap)
-        imageView.background = BitmapDrawable(resources, bitmap)
-    }
-
 }
 
 class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint) {}

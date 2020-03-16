@@ -3,7 +3,7 @@ package com.example.thewitnesspuzzles.model
 class Maze(
     val id: Int,
     var lines: Set<Line>,
-    var path: Path
+    var path: Path? = null
 ) {
 
     fun getLinesAsList(): List<Line> {

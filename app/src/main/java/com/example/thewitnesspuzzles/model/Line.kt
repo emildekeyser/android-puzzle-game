@@ -1,6 +1,6 @@
 package com.example.thewitnesspuzzles.model
 
-class Line(val begin: Node, val end: Node, val dot: Boolean, var taken: Boolean = false) {
+class Line(val begin: Node, val end: Node, val dot: Boolean = false, var taken: Boolean = false) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
