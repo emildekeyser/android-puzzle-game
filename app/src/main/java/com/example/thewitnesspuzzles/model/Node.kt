@@ -48,8 +48,14 @@ class Node(
         return false
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun isReachable(other: Node): Boolean {
+        return isAdjacent(other)
+        //todo adapt reachable to adjust for diagonals and longer lines
+    }
+
     fun hasMatchingCoordinates(coordinates: Pair<Int, Int>): Boolean {
-        val (x, y) = coordinates;
+        val (x, y) = coordinates
         return xPos == x && yPos == y
     }
 }

@@ -33,4 +33,8 @@ class Line(val begin: Node, val end: Node, val dot: Boolean = false, var taken: 
         return begin.hasMatchingCoordinates(coordinates)
                 || end.hasMatchingCoordinates(coordinates)
     }
+
+    fun reverseLine(): Line {
+        return Line(end, begin)
+    }
 }
