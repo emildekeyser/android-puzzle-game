@@ -2,16 +2,16 @@ package com.example.thewitnesspuzzles
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Color.red
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.thewitnesspuzzles.ShakeListener.OnShakeListener
 
-class MenuActivity : AppCompatActivity() {
+class MenuActivity : AppCompatActivity () {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +20,11 @@ class MenuActivity : AppCompatActivity() {
 
         val layout = findViewById(R.id.layout) as LinearLayout
 
-        // creating the button
+
         val startbutton = Button(this)
         val keuzebutton = Button(this)
         val closebutton = Button(this)
+
 
         startbutton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         startbutton.setPadding(0,1500,0,0)
@@ -57,5 +58,19 @@ class MenuActivity : AppCompatActivity() {
         layout.addView(startbutton)
         layout.addView(keuzebutton)
         layout.addView(closebutton)
+
+
+        val mShaker = ShakeListener(this)
+        mShaker.setOnShakeListener(object : OnShakeListener {
+            override fun onShake() {
+                startbutton.setPadding(0,0,0,0)
+                layout.removeAllViews();
+                closebutton.setPadding(0,1500,0,0)
+                layout.addView(closebutton)
+                layout.addView(startbutton)
+                layout.addView(keuzebutton)
+            }
+        })
     }
+
 }
