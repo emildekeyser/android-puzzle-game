@@ -2,6 +2,7 @@ package com.example.thewitnesspuzzles
 
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
@@ -15,12 +16,18 @@ import com.example.thewitnesspuzzles.ShakeListener.OnShakeListener
 import java.util.concurrent.ThreadLocalRandom
 
 class MenuActivity : AppCompatActivity () {
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
+        // music
+        mediaPlayer = MediaPlayer.create(this, R.raw.mario)
+        mediaPlayer?.start()
 
+
+        // layout
         val layout = findViewById(R.id.layout) as LinearLayout
 
 
@@ -67,6 +74,7 @@ class MenuActivity : AppCompatActivity () {
         mShaker.setOnShakeListener(object : OnShakeListener {
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun onShake() {
+
                 val randomInteger = ThreadLocalRandom.current().nextInt(1, 7)
 
                 if(randomInteger == 1) {
@@ -112,7 +120,7 @@ class MenuActivity : AppCompatActivity () {
                     layout.addView(closebutton)
                     layout.addView(startbutton)
                 }
-                
+
                 if(randomInteger == 5) {
                     startbutton.setPadding(0,0,0,0)
                     closebutton.setPadding(0,0,0,0)
