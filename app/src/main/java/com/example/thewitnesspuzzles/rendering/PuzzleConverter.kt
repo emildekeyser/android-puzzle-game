@@ -45,7 +45,7 @@ class PuzzleConverter(
             if (ry1 == ry2){
                 left = ax1
                 top = ay1 - lineThickness / 2
-                right = ax2 - (lineThickness * 2) // als naar end of start gaat anders volle lengte
+                right = ax2 //- (lineThickness * 2) // als naar end of start gaat anders volle lengte
                 bottom = ay2 + lineThickness / 2
             } else {//if (rx1 == rx2) {
                 left = ax1 - lineThickness / 2
@@ -64,11 +64,24 @@ class PuzzleConverter(
 
     private fun absoluteUnit(): Float {
         val maxRelativeLength = 1f // TODO
-        return screenWidth / maxRelativeLength
+        val space = screenWidth * 0.1f
+        return (screenWidth - space) / maxRelativeLength
     }
 
     private fun convertNodes(nodeZero: RenderableNode, nodes: List<Node>): List<RenderableNode> {
-        return listOf(nodeZero)
+        val au = absoluteUnit()
+        val renderableNodes = mutableListOf<RenderableNode>(nodeZero) // TODO ??
+        for (node in nodes){
+            if (node.nodeType == NodeType.END) {
+                val (rx, ry) = Pair(node.xPos, node.yPos)
+                val ax = nodeZero.x + (rx * au)
+                val ay = nodeZero.y + (ry * au)
+                val endNodeRadius = screenWidth * 0.025f // TODO
+                val absoluteEnd = RenderableNode(ax, ay, endNodeRadius, colorPallete.disabledPaint)
+                renderableNodes.add(absoluteEnd)
+            }
+        }
+        return renderableNodes
     }
 
     fun unpack(puzzleData: List<Line>): Pair<List<Node>, List<Line>> {
