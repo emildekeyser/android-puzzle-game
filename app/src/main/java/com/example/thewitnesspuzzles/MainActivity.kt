@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 fun makeDildo(): Maze {
     val start = Node(0, 0, NodeType.START)
-    val end = Node(0, 0, NodeType.END)
+    val end = Node(1, 0, NodeType.END)
     val line = Line(start, end)
     return Maze(0, setOf(line))
 }

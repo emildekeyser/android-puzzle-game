@@ -50,11 +50,15 @@ class Renderer(
     }
 
     fun getTouched(input: Pair<Float, Float>): Node? {
-        return IntersctionCalculator().calculateTouched(converter.nodes(), input)
+        return IntersctionCalculator().calculateTouched(converter.getNodes(), input)
     }
 }
 
-class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint) {}
+class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint) {
+    override fun toString(): String {
+        return "RENDERABLE_NODE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}"
+    }
+}
 class RenderableNode(var x: Float, var y: Float, var nodeRadius: Float, var paint: Paint) {
     override fun toString(): String {
         return "RENDERABLE_NODE: x:${x}, y:${y}, radius:${nodeRadius}, color:${paint.color}"

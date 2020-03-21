@@ -23,8 +23,8 @@ class MenuActivity : AppCompatActivity () {
         setContentView(R.layout.activity_menu)
 
         // music
-        mediaPlayer = MediaPlayer.create(this, R.raw.mario)
-        mediaPlayer?.start()
+//        mediaPlayer = MediaPlayer.create(this, R.raw.mario)
+//        mediaPlayer?.start()
 
 
         // layout
