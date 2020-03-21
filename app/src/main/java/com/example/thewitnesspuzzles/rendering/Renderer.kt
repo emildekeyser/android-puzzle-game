@@ -34,16 +34,17 @@ class Renderer(
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     fun render(mazeData: List<Line>) {
-        val (nodeMap, lineMap) = converter.convertPuzzle(mazeData)
-        this.drawPuzzle(nodeMap, lineMap)
+        val (nodes, lines) = converter.convertPuzzle(mazeData)
+        this.drawPuzzle(nodes, lines)
         imageView.background = BitmapDrawable(resources, bitmap)
     }
 
-    private fun drawPuzzle(nodeMap: Map<RenderableNode, Node>, lineMap: Map<RenderableLine, Unit>){
-        for (line in lineMap.keys) {
+    private fun drawPuzzle(nodes: List<RenderableNode>, lines: List<RenderableLine>){
+        // volgorde lines -> nodes belangrijk
+        for (line in lines) {
             canvas.drawRect(line.left, line.top, line.right, line.bottom, line.paint)
         }
-        for (node in nodeMap.keys) {
+        for (node in nodes) {
             canvas.drawCircle(node.x, node.y, node.nodeRadius, node.paint)
         }
     }

@@ -14,12 +14,12 @@ class PuzzleConverter(
     // evt.: beginnen met hen hoekige dildo te maken om middle nodes te testen
     // middle nodes moeten ook een radius hebben om te kunnen touchen
     fun convertPuzzle(puzzleData: List<Line>):
-            Pair<Map<RenderableNode, Node>, Map<RenderableLine, Unit>> {
+            Pair<List<RenderableNode>, List<RenderableLine>> {
         return fake()
     }
 
     // hardcoded
-    fun fake(): Pair<Map<RenderableNode, Node>, Map<RenderableLine, Unit>> {
+    fun fake(): Pair<List<RenderableNode>, List<RenderableLine>> {
         var startcolor = colorPallete.disabledPaint
         var lineAndEndColor = colorPallete.disabledPaint
 
@@ -50,19 +50,20 @@ class PuzzleConverter(
         val relativeEnd =
             Node(0, 0, NodeType.END, false)
 
-        val nodeMap = mapOf(
-            absoluteStart to relativeStart,
-            absoluteEnd to relativeEnd
-        )
-        val lineMap = mapOf(
-            absoluteLine to relativeline
-        )
-        return Pair(nodeMap, lineMap)
+//        val nodeMap = mapOf(
+//            absoluteStart to relativeStart,
+//            absoluteEnd to relativeEnd
+//        )
+//        val lineMap = mapOf(
+//            absoluteLine to relativeline
+//        )
+        val nodes = listOf(absoluteStart, absoluteEnd)
+        val lines = listOf(absoluteLine)
+        return Pair(nodes, lines)
     }
 
     // get from cache ?
     fun nodes(): Map<RenderableNode, Node> {
-        val (nodeMap, _) = this.convertPuzzle(listOf()) // TODO
-        return nodeMap
+        return mapOf() // TODO
     }
 }
