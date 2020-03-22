@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var maze = makeDildo() // = mazeService.makeMaze(0) // TODO
+        var maze = makeCorner() // = mazeService.makeMaze(0) // TODO
         val renderer = Renderer(imageView, resources)
         var overlord = Overlord(renderer, maze)
 
@@ -44,6 +44,29 @@ fun makeDildo(): Maze {
     val line = Line(start, end)
     return Maze(0, setOf(line))
 }
+
+fun makeXXLDildo(): Maze {
+    val start = Node(0, 0, NodeType.START)
+    val middle = Node(1, 0, NodeType.MIDDLE)
+    val end = Node(2, 0, NodeType.END)
+    val line1 = Line(start, middle)
+    val line2 = Line(middle, end)
+    return Maze(0, setOf(line1, line2))
+}
+
+fun makeCorner(): Maze {
+    val start = Node(0, 0, NodeType.START)
+    val middle = Node(0, 1, NodeType.MIDDLE)
+    val end = Node(1, 1, NodeType.END)
+    val line1 = Line(start, middle)
+    val line2 = Line(middle, end)
+    return Maze(0, setOf(line1, line2))
+}
+
+
+
+
+
 
 
 //        when(event.action) {
