@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var maze = makeCorner() // = mazeService.makeMaze(0) // TODO
+        var maze = makeUpwardCorner() // = mazeService.makeMaze(0) // TODO
         val renderer = Renderer(imageView, resources)
         var overlord = Overlord(renderer, maze)
 
@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
+// TODO: steek in maze service/factory:
 
 fun makeDildo(): Maze {
     val start = Node(0, 0, NodeType.START)
@@ -63,7 +65,14 @@ fun makeCorner(): Maze {
     return Maze(0, setOf(line1, line2))
 }
 
-
+fun makeUpwardCorner(): Maze {
+    val start = Node(0, 0, NodeType.START)
+    val middle = Node(0, -1, NodeType.MIDDLE)
+    val end = Node(1, -1, NodeType.END)
+    val line1 = Line(start, middle)
+    val line2 = Line(middle, end)
+    return Maze(0, setOf(line1, line2))
+}
 
 
 

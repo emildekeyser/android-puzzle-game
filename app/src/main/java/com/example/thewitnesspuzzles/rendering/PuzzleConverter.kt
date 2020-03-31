@@ -3,6 +3,7 @@ package com.example.thewitnesspuzzles.rendering
 import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
+import kotlin.math.absoluteValue
 
 class PuzzleConverter(
     private val screenWidth: Int,
@@ -64,8 +65,8 @@ class PuzzleConverter(
     }
 
     private fun calculateAbsoluteUnit(nodes: List<Node>): Float {
-        val maxY = (nodes.maxBy { n -> n.yPos })!!.yPos + 1
-        val maxX = (nodes.maxBy { n -> n.xPos })!!.xPos + 1
+        val maxY = (nodes.maxBy { n -> n.yPos.absoluteValue})!!.yPos.absoluteValue + 1
+        val maxX = (nodes.maxBy { n -> n.xPos.absoluteValue})!!.xPos.absoluteValue + 1
         val max = listOf(maxX, maxY).max()!!
         val space = screenWidth * 0.1f
         return (screenWidth - space) / max
@@ -106,17 +107,24 @@ class PuzzleConverter(
     private fun calculateNodeZeroZero(nodes: List<Node>): RenderableNode {
         var startcolor = colorPallete.disabledPaint
 
-        val maxY = (nodes.maxBy { n -> n.yPos })!!.yPos
-        val maxX = (nodes.maxBy { n -> n.xPos })!!.xPos
+        val maxY = (nodes.maxBy { n -> n.yPos.absoluteValue})!!.yPos
+        val maxX = (nodes.maxBy { n -> n.xPos.absoluteValue})!!.xPos
 
-        val lineThickness = screenWidth * 0.05f // TODO
+        val lineThickness = screenWidth * 0.05f // TODO make class field ?
         val startNodeRadius = lineThickness
 //        val endNodeRadius = lineThickness / 2
 //        val lineLength = screenWidth - startNodeRadius * 2
 
-//        var x = startNodeRadius + (screenWidth / (maxX + 2f)) // TODO
-        var x = screenWidth / (maxX + 2f)
-        val y = screenHeight / (maxY + 2f)
+//        var x = startNodeRadius + (screenWidth / (maxX + 2f)) // TODO also make class field ?
+        var x = screenWidth / (maxX.absoluteValue + 2f)
+        var y = screenHeight / (maxY.absoluteValue + 2f)
+
+        if (maxX < 0) {
+            x = screenWidth - x
+        }
+        if (maxY < 0) {
+            y = screenHeight - y
+        }
 //        var x = startNodeRadius + absoluteUnit * (maxX + 1)
 //        val y = absoluteUnit * (maxY + 1)
         val absoluteStart = RenderableNode(x, y, startNodeRadius, startcolor) // FAKE
