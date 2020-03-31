@@ -56,7 +56,7 @@ class Renderer(
 
 class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint) {
     override fun toString(): String {
-        return "RENDERABLE_NODE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}"
+        return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}"
     }
 }
 class RenderableNode(var x: Float, var y: Float, var nodeRadius: Float, var paint: Paint) {
