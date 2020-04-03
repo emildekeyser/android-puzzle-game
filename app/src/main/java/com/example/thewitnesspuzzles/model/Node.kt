@@ -22,8 +22,8 @@ class Node(
         if (xPos != other.xPos) return false
         if (yPos != other.yPos) return false
         if (nodeType != other.nodeType) return false
-        if (taken != other.taken) return false
-        if (dot != other.dot) return false
+//        if (taken != other.taken) return false
+//        if (dot != other.dot) return false
 
         return true
     }

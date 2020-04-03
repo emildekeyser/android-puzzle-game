@@ -53,7 +53,8 @@ class PuzzleConverter(
                 right = ax2 + lineThickness / 2 // y2 == y1
                 bottom = ay2
             }
-            val absoluteLine = RenderableLine(left, top, right, bottom, colorPallete.disabledPaint, line)
+            val paint = if (line.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
+            val absoluteLine = RenderableLine(left, top, right, bottom, paint, line)
             println("------------------------------------------------------------")
             println(absoluteLine)
             println("------------------------------------------------------------")
@@ -78,7 +79,8 @@ class PuzzleConverter(
                 val ax = nodeZero.x + (rx * absoluteUnit)
                 val ay = nodeZero.y + (ry * absoluteUnit)
                 val endNodeRadius = screenWidth * 0.025f // TODO
-                val absoluteEnd = RenderableNode(ax, ay, endNodeRadius, colorPallete.disabledPaint, node)
+                val paint = if (node.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
+                val absoluteEnd = RenderableNode(ax, ay, endNodeRadius, paint, node)
                 renderableNodes.add(absoluteEnd)
             }
         }
@@ -99,8 +101,6 @@ class PuzzleConverter(
     /* TODO: Dont do it this way, just take 0px,0px as starting point then calculate the whole
     maze, then at the end move point 0,0 to the correct spot depending on total w and h */
     private fun calculateNodeZeroZero(nodes: MutableList<Node>): RenderableNode {
-        var startcolor = colorPallete.disabledPaint
-
         val maxY = (nodes.maxBy { n -> n.yPos.absoluteValue})!!.yPos
         val maxX = (nodes.maxBy { n -> n.xPos.absoluteValue})!!.xPos
 
@@ -129,7 +129,8 @@ class PuzzleConverter(
                 break
             }
         }
-        val absoluteStart = RenderableNode(x, y, startNodeRadius, startcolor, startref) // FAKE
+        val paint = if (startref.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
+        val absoluteStart = RenderableNode(x, y, startNodeRadius, paint, startref) // FAKE
         return absoluteStart
     }
 }
