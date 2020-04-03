@@ -74,15 +74,15 @@ class PuzzleConverter(
     private fun convertNodes(nodeZero: RenderableNode, nodes: List<Node>): List<RenderableNode> {
         val renderableNodes = mutableListOf<RenderableNode>(nodeZero) // TODO ??
         for (node in nodes){
-            if (node.nodeType == NodeType.END) {
-                val (rx, ry) = Pair(node.xPos, node.yPos)
-                val ax = nodeZero.x + (rx * absoluteUnit)
-                val ay = nodeZero.y + (ry * absoluteUnit)
-                val endNodeRadius = screenWidth * 0.025f // TODO
-                val paint = if (node.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
-                val absoluteEnd = RenderableNode(ax, ay, endNodeRadius, paint, node)
-                renderableNodes.add(absoluteEnd)
-            }
+//            if (node.nodeType == NodeType.END) {
+            val (rx, ry) = Pair(node.xPos, node.yPos)
+            val ax = nodeZero.x + (rx * absoluteUnit)
+            val ay = nodeZero.y + (ry * absoluteUnit)
+            val endNodeRadius = screenWidth * 0.025f // TODO
+            val paint = if (node.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
+            val absoluteEnd = RenderableNode(ax, ay, endNodeRadius, paint, node)
+            renderableNodes.add(absoluteEnd)
+//            }
         }
         return renderableNodes
     }

@@ -27,6 +27,7 @@ class Overlord(val renderer: Renderer, val maze: Maze) {
             if (l.begin == n) {
                 l.begin.taken = true
             } else if (l.end == n) {
+                l.taken = true
                 l.end.taken = true
             }
         }
