@@ -4,12 +4,12 @@ import com.example.thewitnesspuzzles.model.Node
 
 class IntersctionCalculator {
     fun calculateTouched(
-        nodes: Map<RenderableNode, Node>,
+        nodes: List<RenderableNode>,
         input: Pair<Float, Float>
     ): Node? {
-        for (node in nodes.keys) {
+        for (node in nodes) {
             if (intersects(node, input))
-                return nodes[node]
+                return node.relativeNodeRef
         }
         return null
     }

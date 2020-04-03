@@ -25,6 +25,8 @@ class Renderer(
     private val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
     private val canvas: Canvas = Canvas(bitmap)
     private val converter = PuzzleConverter(this.screenWidth, this.screenHeight, this.colorPallete)
+    private var nodes = listOf<RenderableNode>()
+    private var lines = listOf<RenderableLine>()
 
     init {
         colorPallete.disabledPaint.setColor(Color.BLACK)
@@ -34,12 +36,14 @@ class Renderer(
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     fun render(mazeData: List<Line>) {
-        val (nodes, lines) = converter.convertPuzzle(mazeData)
-        this.drawPuzzle(nodes, lines)
+        val (n, l) = converter.convertPuzzle(mazeData)
+        nodes = n
+        lines = l
+        this.drawPuzzle()
         imageView.background = BitmapDrawable(resources, bitmap)
     }
 
-    private fun drawPuzzle(nodes: List<RenderableNode>, lines: List<RenderableLine>){
+    private fun drawPuzzle(){
         // volgorde lines -> nodes belangrijk
         for (line in lines) {
             canvas.drawRect(line.left, line.top, line.right, line.bottom, line.paint)
@@ -50,18 +54,18 @@ class Renderer(
     }
 
     fun getTouched(input: Pair<Float, Float>): Node? {
-        return IntersctionCalculator().calculateTouched(converter.getNodes(), input)
+        return IntersctionCalculator().calculateTouched(nodes, input)
     }
 }
 
-class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint) {
+class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint, var relativeLineRef: Line) {
     override fun toString(): String {
-        return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}"
+        return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}, rline:${relativeLineRef}"
     }
 }
-class RenderableNode(var x: Float, var y: Float, var nodeRadius: Float, var paint: Paint) {
+class RenderableNode(var x: Float, var y: Float, var nodeRadius: Float, var paint: Paint, var relativeNodeRef: Node) {
     override fun toString(): String {
-        return "RENDERABLE_NODE: x:${x}, y:${y}, radius:${nodeRadius}, color:${paint.color}"
+        return "RENDERABLE_NODE: x:${x}, y:${y}, radius:${nodeRadius}, color:${paint.color}, rnode:${relativeNodeRef}"
     }
 }
 
