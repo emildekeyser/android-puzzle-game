@@ -9,31 +9,51 @@ class PuzzleConverter(
     private val screenWidth: Int,
     private val screenHeight: Int,
     private val colorPallete: ColorPallete,
-    private var absoluteUnit: Float = 0f
+    private var absoluteUnit: Float = 0f,
+    private var xMove: Float = 0f,
+    private var yMove: Float = 0f,
+    private val lineThickness: Float = screenWidth * 0.05f,
+    private val startNodeRadius: Float = lineThickness,
+    private val nodeRadius: Float = startNodeRadius / 2
 ) {
 
     fun convertPuzzle(puzzleData: List<Line>):
             Pair<List<RenderableNode>, List<RenderableLine>> {
         val (nodes, lines) = unpack(puzzleData)
         absoluteUnit = calculateAbsoluteUnit(nodes)
-        val nodeZero = calculateNodeZeroZero(nodes)
-        val renderableLines = convertLines(nodeZero, lines)
-        val renderableNodes = convertNodes(nodeZero, nodes)
+        xMove = calculateXMove(nodes)
+        yMove = calculateYMove(nodes)
+        val renderableLines = convertLines(lines)
+        val renderableNodes = convertNodes(nodes)
         return Pair(renderableNodes, renderableLines)
     }
 
-    private fun convertLines(nodeZero: RenderableNode, lines: List<Line>): List<RenderableLine> {
-        val lineThickness = screenWidth * 0.05f
+    private fun calculateYMove(nodes: List<Node>): Float {
+        val max = (nodes.maxBy { n -> n.yPos})!!.yPos * absoluteUnit
+        val min = (nodes.minBy { n -> n.yPos})!!.yPos * absoluteUnit
+        val midMaze = (max - min) / 2
+        val midScreen = screenHeight / 2f
+        return midScreen - midMaze
+    }
+
+    private fun calculateXMove(nodes: List<Node>): Float {
+        val max = (nodes.maxBy { n -> n.xPos})!!.xPos * absoluteUnit
+        val min = (nodes.minBy { n -> n.xPos})!!.xPos * absoluteUnit
+        val midMaze = (max - min) / 2
+        val midScreen = screenWidth / 2f
+        return midScreen - midMaze
+    }
+
+    private fun convertLines(lines: List<Line>): List<RenderableLine> {
         val renderableLines = mutableListOf<RenderableLine>()
         for (line in lines) {
             var (rx1, ry1) = Pair(line.begin.xPos.toFloat(), line.begin.yPos.toFloat())
             var (rx2, ry2) = Pair(line.end.xPos.toFloat(), line.end.yPos.toFloat())
 
-            val ax1 = nodeZero.x + (rx1 * absoluteUnit)
-            val ay1 = nodeZero.y + (ry1 * absoluteUnit)
-
-            val ax2 = nodeZero.x + (rx2 * absoluteUnit)
-            val ay2 = nodeZero.y + (ry2 * absoluteUnit)
+            val ax1 = (rx1 * absoluteUnit) + xMove
+            val ay1 = (ry1 * absoluteUnit) + yMove
+            val ax2 = (rx2 * absoluteUnit) + xMove
+            val ay2 = (ry2 * absoluteUnit) + yMove
 
             var left:Float
             var top:Float
@@ -41,7 +61,7 @@ class PuzzleConverter(
             var bottom:Float
             println(ry1)
             println(ry2)
-            // TODO: maybe remove this if
+            // TODO: can I remove this if ?
             if (ry1 == ry2){
                 left = ax1
                 top = ay1 - lineThickness / 2
@@ -53,11 +73,9 @@ class PuzzleConverter(
                 right = ax2 + lineThickness / 2 // y2 == y1
                 bottom = ay2
             }
+
             val paint = if (line.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
             val absoluteLine = RenderableLine(left, top, right, bottom, paint, line)
-            println("------------------------------------------------------------")
-            println(absoluteLine)
-            println("------------------------------------------------------------")
             renderableLines.add(absoluteLine)
         }
         return renderableLines
@@ -71,18 +89,19 @@ class PuzzleConverter(
         return (screenWidth - space) / max
     }
 
-    private fun convertNodes(nodeZero: RenderableNode, nodes: List<Node>): List<RenderableNode> {
-        val renderableNodes = mutableListOf<RenderableNode>(nodeZero) // TODO ??
+    private fun convertNodes(nodes: List<Node>): List<RenderableNode> {
+        val renderableNodes = mutableListOf<RenderableNode>() // TODO: refactor to immutable (use map)
         for (node in nodes){
-//            if (node.nodeType == NodeType.END) {
+            var r = nodeRadius
+            if (node.nodeType == NodeType.START) {
+                r = startNodeRadius
+            }
             val (rx, ry) = Pair(node.xPos, node.yPos)
-            val ax = nodeZero.x + (rx * absoluteUnit)
-            val ay = nodeZero.y + (ry * absoluteUnit)
-            val endNodeRadius = screenWidth * 0.025f // TODO
+            val ax = (rx * absoluteUnit) + xMove
+            val ay = (ry * absoluteUnit) + yMove
             val paint = if (node.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
-            val absoluteEnd = RenderableNode(ax, ay, endNodeRadius, paint, node)
+            val absoluteEnd = RenderableNode(ax, ay, r, paint, node)
             renderableNodes.add(absoluteEnd)
-//            }
         }
         return renderableNodes
     }
@@ -100,37 +119,37 @@ class PuzzleConverter(
 
     /* TODO: Dont do it this way, just take 0px,0px as starting point then calculate the whole
     maze, then at the end move point 0,0 to the correct spot depending on total w and h */
-    private fun calculateNodeZeroZero(nodes: MutableList<Node>): RenderableNode {
-        val maxY = (nodes.maxBy { n -> n.yPos.absoluteValue})!!.yPos
-        val maxX = (nodes.maxBy { n -> n.xPos.absoluteValue})!!.xPos
-
-        val lineThickness = screenWidth * 0.05f // TODO make class field ?
-        val startNodeRadius = lineThickness
-//        val endNodeRadius = lineThickness / 2
-//        val lineLength = screenWidth - startNodeRadius * 2
-
-//        var x = startNodeRadius + (screenWidth / (maxX + 2f)) // TODO also make class field ?
-        var x = screenWidth / (maxX.absoluteValue + 2f)
-        var y = screenHeight / (maxY.absoluteValue + 2f)
-
-        if (maxX < 0) {
-            x = screenWidth - x
-        }
-        if (maxY < 0) {
-            y = screenHeight - y
-        }
-//        var x = startNodeRadius + absoluteUnit * (maxX + 1)
-//        val y = absoluteUnit * (maxY + 1)
-        var startref = Node(0, 0, NodeType.START, false)
-        for (n in nodes){
-            if (n.xPos == 0 && n.yPos == 0) {
-                startref = n
-                nodes.remove(n)
-                break
-            }
-        }
-        val paint = if (startref.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
-        val absoluteStart = RenderableNode(x, y, startNodeRadius, paint, startref) // FAKE
-        return absoluteStart
-    }
+//    private fun calculateNodeZeroZero(nodes: MutableList<Node>): RenderableNode {
+//        val maxY = (nodes.maxBy { n -> n.yPos.absoluteValue})!!.yPos
+//        val maxX = (nodes.maxBy { n -> n.xPos.absoluteValue})!!.xPos
+//
+//        val lineThickness = screenWidth * 0.05f
+//        val startNodeRadius = lineThickness
+////        val endNodeRadius = lineThickness / 2
+////        val lineLength = screenWidth - startNodeRadius * 2
+//
+////        var x = startNodeRadius + (screenWidth / (maxX + 2f))
+//        var x = screenWidth / (maxX.absoluteValue + 2f)
+//        var y = screenHeight / (maxY.absoluteValue + 2f)
+//
+//        if (maxX < 0) {
+//            x = screenWidth - x
+//        }
+//        if (maxY < 0) {
+//            y = screenHeight - y
+//        }
+////        var x = startNodeRadius + absoluteUnit * (maxX + 1)
+////        val y = absoluteUnit * (maxY + 1)
+//        var startref = Node(0, 0, NodeType.START, false)
+//        for (n in nodes){
+//            if (n.xPos == 0 && n.yPos == 0) {
+//                startref = n
+//                nodes.remove(n)
+//                break
+//            }
+//        }
+//        val paint = if (startref.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
+//        val absoluteStart = RenderableNode(x, y, startNodeRadius, paint, startref) // FAKE
+//        return absoluteStart
+//    }
 }

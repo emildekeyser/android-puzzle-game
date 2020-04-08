@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var maze = makeUpwardCorner() // = mazeService.makeMaze(0) // TODO
+//        var maze = mazeService.makeMaze(blabla) // TODO
+//        var maze = makeUpwardCorner()
+        var maze = makeCorner()
         val renderer = Renderer(imageView, resources)
         var overlord = Overlord(renderer, maze)
 

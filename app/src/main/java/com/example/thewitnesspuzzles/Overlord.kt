@@ -15,7 +15,7 @@ class Overlord(val renderer: Renderer, val maze: Maze) {
         val touchedNode = renderer.getTouched(input)
 //        maze.update(touched) // TODO
         FAKEupdate(touchedNode, maze)
-        renderer.render(maze.getLinesAsList()) // TODO
+        renderer.render(maze.getLinesAsList())
 //        if(puzzle.victorious()){ // TODO
 //           // end game // TODO
 //        }

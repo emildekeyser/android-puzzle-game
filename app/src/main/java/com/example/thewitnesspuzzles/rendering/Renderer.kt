@@ -24,7 +24,11 @@ class Renderer(
     private val colorPallete = ColorPallete()
     private val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
     private val canvas: Canvas = Canvas(bitmap)
-    private val converter = PuzzleConverter(this.screenWidth, this.screenHeight, this.colorPallete)
+    private val converter = PuzzleConverter(
+        this.screenWidth,
+        this.screenHeight,
+        this.colorPallete
+    )
     private var nodes = listOf<RenderableNode>()
     private var lines = listOf<RenderableLine>()
 
