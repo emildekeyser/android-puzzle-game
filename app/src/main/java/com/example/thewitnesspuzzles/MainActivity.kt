@@ -11,18 +11,20 @@ import com.example.thewitnesspuzzles.model.Maze
 import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
 import com.example.thewitnesspuzzles.rendering.Renderer
+import com.example.thewitnesspuzzles.service.MazeService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    val service = MazeService();
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
 //        var maze = mazeService.makeMaze(blabla) // TODO
 //        var maze = makeUpwardCorner()
-        var maze = makeCorner()
+        var maze = service.getServiceMaze();
         val renderer = Renderer(imageView, resources)
         var overlord = Overlord(renderer, maze)
 

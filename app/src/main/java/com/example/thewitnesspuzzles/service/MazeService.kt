@@ -13,12 +13,14 @@ class MazeService {
 
     fun setMaze(x: Int) {
         if (x == 1) {
+            println("maze 1 set")
             val start = Node(0, 0, NodeType.START)
             val end = Node(1, 0, NodeType.END)
             val line = Line(start, end)
             maze = Maze(0, setOf(line))
         }
         if (x == 2) {
+            println("maze 2 set")
             val start = Node(0, 0, NodeType.START)
             val middle = Node(1, 0, NodeType.MIDDLE)
             val end = Node(2, 0, NodeType.END)
@@ -27,6 +29,7 @@ class MazeService {
             maze = Maze(0, setOf(line1, line2))
         }
         if (x == 3) {
+            println("maze 3 set")
             val start = Node(0, 0, NodeType.START)
             val middle = Node(0, 1, NodeType.MIDDLE)
             val end = Node(1, 1, NodeType.END)
