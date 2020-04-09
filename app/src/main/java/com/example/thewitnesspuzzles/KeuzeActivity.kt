@@ -10,6 +10,8 @@ class KeuzeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keuze)
 
-
+        level1.setOnClickListener { println("level1") }
+        level2.setOnClickListener { println("level2") }
+        level3.setOnClickListener { println("level3") }
     }
 }
