@@ -9,7 +9,6 @@ import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.thewitnesspuzzles.ShakeListener.OnShakeListener
@@ -49,7 +48,11 @@ class MenuActivity : AppCompatActivity () {
 
         keuzebutton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         keuzebutton.text = "KIES PUZZLE"
-        keuzebutton.setOnClickListener { Toast.makeText(this@MenuActivity, "Demoversie voorziet geen extra puzzels", Toast.LENGTH_LONG).show() }
+        keuzebutton.setOnClickListener {
+            //Toast.makeText(this@MenuActivity, "Demoversie voorziet geen extra puzzels", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, KeuzeActivity::class.java)
+            startActivity(intent)
+        }
         keuzebutton.setBackgroundColor(0x00000000)
         keuzebutton.setTextColor(Color.parseColor("#ffffff"))
         keuzebutton.setTextSize(TypedValue.COMPLEX_UNIT_DIP,35f)
