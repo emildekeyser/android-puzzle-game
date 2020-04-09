@@ -9,11 +9,7 @@ class KeuzeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keuze)
-        puzzel1.setOnClickListener() {
-            println("puzzel1")
-        }
-        puzzel2.setOnClickListener() {
-            println("puzzel2")
-        }
+
+
     }
 }

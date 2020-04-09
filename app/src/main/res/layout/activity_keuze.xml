@@ -7,21 +7,27 @@
     tools:context=".KeuzeActivity">
 
     <ImageView
-        android:id="@+id/puzzel1"
-        android:layout_width="147dp"
-        android:layout_height="246dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="444dp"
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/background" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/background_keuze" />
 
-    <ImageView
-        android:id="@+id/puzzel2"
-        android:layout_width="212dp"
-        android:layout_height="332dp"
-        android:src="@drawable/puzzel2"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-58dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginTop="424dp"
+        android:background="@drawable/rounded_button"
+        android:text="level1"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
