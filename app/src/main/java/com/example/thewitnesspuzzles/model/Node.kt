@@ -2,6 +2,7 @@ package com.example.thewitnesspuzzles.model
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import java.io.Serializable
 import java.lang.Integer.max
 import java.lang.Integer.min
 
@@ -11,7 +12,7 @@ class Node(
     val nodeType: NodeType,
     val dot: Boolean = false,
     var taken: Boolean = false
-) {
+): Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

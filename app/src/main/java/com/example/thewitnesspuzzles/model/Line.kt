@@ -1,6 +1,8 @@
 package com.example.thewitnesspuzzles.model
 
-class Line(val begin: Node, val end: Node, val dot: Boolean = false, var taken: Boolean = false) {
+import java.io.Serializable
+
+class Line(val begin: Node, val end: Node, val dot: Boolean = false, var taken: Boolean = false): Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

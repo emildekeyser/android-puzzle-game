@@ -12,9 +12,11 @@ import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.thewitnesspuzzles.ShakeListener.OnShakeListener
+import com.example.thewitnesspuzzles.service.MazeService
 import java.util.concurrent.ThreadLocalRandom
 
 class MenuActivity : AppCompatActivity () {
+    var service = MazeService()
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,7 @@ class MenuActivity : AppCompatActivity () {
         startbutton.text = "START"
         startbutton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("Extra", service)
             startActivity(intent)
         }
         startbutton.setBackgroundColor(0x00000000)
@@ -51,6 +54,7 @@ class MenuActivity : AppCompatActivity () {
         keuzebutton.setOnClickListener {
             //Toast.makeText(this@MenuActivity, "Demoversie voorziet geen extra puzzels", Toast.LENGTH_LONG).show()
             val intent = Intent(this, KeuzeActivity::class.java)
+            intent.putExtra("Extra",service)
             startActivity(intent)
         }
         keuzebutton.setBackgroundColor(0x00000000)

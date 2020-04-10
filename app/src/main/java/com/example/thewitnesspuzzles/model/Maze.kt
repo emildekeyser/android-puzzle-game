@@ -2,12 +2,13 @@ package com.example.thewitnesspuzzles.model
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import java.io.Serializable
 
 class Maze(
     val id: Int,
     var lines: Set<Line>,
     var path: Path = Path()
-) {
+) : Serializable{
 
     fun getLinesAsList(): List<Line> {
         return lines.toList()

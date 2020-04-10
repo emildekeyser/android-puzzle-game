@@ -14,17 +14,17 @@ import com.example.thewitnesspuzzles.rendering.Renderer
 import com.example.thewitnesspuzzles.service.MazeService
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-    val service = MazeService();
+class MainActivity: AppCompatActivity() {
+
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val service = intent.getSerializableExtra("Extra") as? MazeService
 
 //        var maze = mazeService.makeMaze(blabla) // TODO
 //        var maze = makeUpwardCorner()
-        var maze = service.getServiceMaze();
+        var maze = service!!.getServiceMaze();
         val renderer = Renderer(imageView, resources)
         var overlord = Overlord(renderer, maze)
 
