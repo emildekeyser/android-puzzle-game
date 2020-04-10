@@ -22,6 +22,7 @@ class Node(
         if (xPos != other.xPos) return false
         if (yPos != other.yPos) return false
         if (nodeType != other.nodeType) return false
+        // TODO think about this
 //        if (taken != other.taken) return false
 //        if (dot != other.dot) return false
 
@@ -35,6 +36,7 @@ class Node(
         return result
     }
 
+    // TODO why is this in domain code, Johan?
     @RequiresApi(Build.VERSION_CODES.N)
     fun isAdjacent(other: Node): Boolean {
         if (xPos == other.xPos) {
@@ -48,6 +50,7 @@ class Node(
         return false
     }
 
+    // TODO why is this in domain code, Johan?
     @RequiresApi(Build.VERSION_CODES.N)
     fun isReachable(other: Node): Boolean {
         return isAdjacent(other)
