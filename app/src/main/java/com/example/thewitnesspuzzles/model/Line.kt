@@ -18,6 +18,7 @@ class Line(val begin: Node, val end: Node, val dot: Boolean = false, var taken: 
             if (end != other.begin)
                 return false
         }
+        // TODO think about this
         if (taken != other.taken) return false
         if (dot != other.dot) return false
 

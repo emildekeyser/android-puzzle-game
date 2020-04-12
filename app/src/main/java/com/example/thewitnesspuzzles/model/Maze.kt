@@ -14,6 +14,7 @@ class Maze(
         return lines.toList()
     }
 
+    // TODO why is this in domain code, Johan?
     @RequiresApi(Build.VERSION_CODES.N)
     fun updatePath(coordinates: Pair<Int, Int>): Boolean {
         var coordinatesFound = false
