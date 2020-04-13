@@ -24,7 +24,7 @@ class PuzzleConverter(
         absoluteUnit = calculateAbsoluteUnit(nodes)
         xMove = calculateXMove(nodes)
         yMove = calculateYMove(nodes)
-        val renderableLines = lines.map {line -> convertLine(line)}
+        val renderableLines = lines.map { line -> convertLine(line)}
         val renderableNodes = nodes.map { node -> convertNode(node) }
         return Pair(renderableNodes, renderableLines)
     }
@@ -60,13 +60,14 @@ class PuzzleConverter(
             var bottom:Float
             println(ry1)
             println(ry2)
-            // TODO: can I remove this if ?
-            if (ry1 == ry2){
+        // TODO: this needs to be reworked to support diagonal
+        // can I remove this, use vector product ??
+        if (ry1 == ry2){ // horizontale lijn
                 left = ax1
                 top = ay1 - lineThickness / 2
                 right = ax2 //- (lineThickness * 2) // als naar end of start gaat anders volle lengte
                 bottom = ay2 + lineThickness / 2
-            } else {//if (rx1 == rx2) {
+            } else {//if (rx1 == rx2) { // verticale lijn
                 left = ax1 - lineThickness / 2
                 top = ay1
                 right = ax2 + lineThickness / 2 // y2 == y1
