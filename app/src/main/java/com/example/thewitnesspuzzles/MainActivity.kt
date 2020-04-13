@@ -11,7 +11,7 @@ import com.example.thewitnesspuzzles.model.Maze
 import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
 import com.example.thewitnesspuzzles.rendering.Renderer
-import com.example.thewitnesspuzzles.service.MazeService
+import com.example.thewitnesspuzzles.service.MazeFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity() {
@@ -20,7 +20,7 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val service = intent.getSerializableExtra("Extra") as? MazeService
+        val service = intent.getSerializableExtra("Extra") as? MazeFactory
 
         var maze = makeEight()
 //        var maze = service!!.getServiceMaze();
