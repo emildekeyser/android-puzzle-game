@@ -12,11 +12,11 @@ import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.thewitnesspuzzles.ShakeListener.OnShakeListener
-import com.example.thewitnesspuzzles.service.MazeService
+import com.example.thewitnesspuzzles.service.MazeFactory
 import java.util.concurrent.ThreadLocalRandom
 
 class MenuActivity : AppCompatActivity () {
-    var service = MazeService()
+    var service = MazeFactory()
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
