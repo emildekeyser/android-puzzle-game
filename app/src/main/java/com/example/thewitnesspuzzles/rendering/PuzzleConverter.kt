@@ -3,6 +3,7 @@ package com.example.thewitnesspuzzles.rendering
 import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
+import kotlin.math.abs
 import kotlin.math.absoluteValue
 
 class PuzzleConverter(
@@ -23,8 +24,8 @@ class PuzzleConverter(
         absoluteUnit = calculateAbsoluteUnit(nodes)
         xMove = calculateXMove(nodes)
         yMove = calculateYMove(nodes)
-        val renderableLines = convertLines(lines)
-        val renderableNodes = convertNodes(nodes)
+        val renderableLines = lines.map {line -> convertLine(line)}
+        val renderableNodes = nodes.map { node -> convertNode(node) }
         return Pair(renderableNodes, renderableLines)
     }
 
@@ -44,9 +45,7 @@ class PuzzleConverter(
         return midScreen - midMaze
     }
 
-    private fun convertLines(lines: List<Line>): List<RenderableLine> {
-        val renderableLines = mutableListOf<RenderableLine>()
-        for (line in lines) {
+    private fun convertLine(line: Line): RenderableLine {
             var (rx1, ry1) = Pair(line.begin.xPos.toFloat(), line.begin.yPos.toFloat())
             var (rx2, ry2) = Pair(line.end.xPos.toFloat(), line.end.yPos.toFloat())
 
@@ -75,10 +74,7 @@ class PuzzleConverter(
             }
 
             val paint = if (line.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
-            val absoluteLine = RenderableLine(left, top, right, bottom, paint, line)
-            renderableLines.add(absoluteLine)
-        }
-        return renderableLines
+            return RenderableLine(left, top, right, bottom, paint, line)
     }
 
     private fun calculateAbsoluteUnit(nodes: List<Node>): Float {
@@ -89,9 +85,7 @@ class PuzzleConverter(
         return (screenWidth - space) / max
     }
 
-    private fun convertNodes(nodes: List<Node>): List<RenderableNode> {
-        val renderableNodes = mutableListOf<RenderableNode>() // TODO: refactor to immutable (use map)
-        for (node in nodes){
+    private fun convertNode(node: Node): RenderableNode {
             val (rx, ry) = Pair(node.xPos, node.yPos)
             val ax = (rx * absoluteUnit) + xMove
             val ay = (ry * absoluteUnit) + yMove
@@ -103,17 +97,15 @@ class PuzzleConverter(
                 val right = ax + halfSide
                 val bottom = ay + halfSide
                 val absoluteNode = Rectangle(left, top, right, bottom , paint, node)
-                renderableNodes.add(absoluteNode)
+                return absoluteNode
             } else {
                 var r = nodeRadius
                 if (node.nodeType == NodeType.START) {
                     r = startNodeRadius
                 }
                 val absoluteNode = Circle(ax, ay, r, paint, node)
-                renderableNodes.add(absoluteNode)
+                return absoluteNode
             }
-        }
-        return renderableNodes
     }
 
     fun unpack(puzzleData: List<Line>): Pair<MutableList<Node>, List<Line>> {
