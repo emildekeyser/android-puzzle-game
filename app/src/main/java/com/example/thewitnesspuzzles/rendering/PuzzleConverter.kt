@@ -14,7 +14,7 @@ class PuzzleConverter(
     private var yMove: Float = 0f,
     private val lineThickness: Float = screenWidth * 0.05f,
     private val startNodeRadius: Float = lineThickness,
-    private val nodeRadius: Float = startNodeRadius / 2
+    private val nodeRadius: Float = startNodeRadius * 0.75f
 ) {
 
     fun convertPuzzle(puzzleData: List<Line>):
@@ -92,16 +92,26 @@ class PuzzleConverter(
     private fun convertNodes(nodes: List<Node>): List<RenderableNode> {
         val renderableNodes = mutableListOf<RenderableNode>() // TODO: refactor to immutable (use map)
         for (node in nodes){
-            var r = nodeRadius
-            if (node.nodeType == NodeType.START) {
-                r = startNodeRadius
-            }
             val (rx, ry) = Pair(node.xPos, node.yPos)
             val ax = (rx * absoluteUnit) + xMove
             val ay = (ry * absoluteUnit) + yMove
             val paint = if (node.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
-            val absoluteEnd = RenderableNode(ax, ay, r, paint, node)
-            renderableNodes.add(absoluteEnd)
+            if (node.nodeType == NodeType.END) {
+                val halfSide = startNodeRadius
+                val left = ax - halfSide
+                val top = ay - halfSide
+                val right = ax + halfSide
+                val bottom = ay + halfSide
+                val absoluteNode = Rectangle(left, top, right, bottom , paint, node)
+                renderableNodes.add(absoluteNode)
+            } else {
+                var r = nodeRadius
+                if (node.nodeType == NodeType.START) {
+                    r = startNodeRadius
+                }
+                val absoluteNode = Circle(ax, ay, r, paint, node)
+                renderableNodes.add(absoluteNode)
+            }
         }
         return renderableNodes
     }
@@ -116,40 +126,4 @@ class PuzzleConverter(
         }
         return Pair(nodes, lines)
     }
-
-    /* TODO: Dont do it this way, just take 0px,0px as starting point then calculate the whole
-    maze, then at the end move point 0,0 to the correct spot depending on total w and h */
-//    private fun calculateNodeZeroZero(nodes: MutableList<Node>): RenderableNode {
-//        val maxY = (nodes.maxBy { n -> n.yPos.absoluteValue})!!.yPos
-//        val maxX = (nodes.maxBy { n -> n.xPos.absoluteValue})!!.xPos
-//
-//        val lineThickness = screenWidth * 0.05f
-//        val startNodeRadius = lineThickness
-////        val endNodeRadius = lineThickness / 2
-////        val lineLength = screenWidth - startNodeRadius * 2
-//
-////        var x = startNodeRadius + (screenWidth / (maxX + 2f))
-//        var x = screenWidth / (maxX.absoluteValue + 2f)
-//        var y = screenHeight / (maxY.absoluteValue + 2f)
-//
-//        if (maxX < 0) {
-//            x = screenWidth - x
-//        }
-//        if (maxY < 0) {
-//            y = screenHeight - y
-//        }
-////        var x = startNodeRadius + absoluteUnit * (maxX + 1)
-////        val y = absoluteUnit * (maxY + 1)
-//        var startref = Node(0, 0, NodeType.START, false)
-//        for (n in nodes){
-//            if (n.xPos == 0 && n.yPos == 0) {
-//                startref = n
-//                nodes.remove(n)
-//                break
-//            }
-//        }
-//        val paint = if (startref.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
-//        val absoluteStart = RenderableNode(x, y, startNodeRadius, paint, startref) // FAKE
-//        return absoluteStart
-//    }
 }

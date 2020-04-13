@@ -22,9 +22,8 @@ class MainActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val service = intent.getSerializableExtra("Extra") as? MazeService
 
-//        var maze = mazeService.makeMaze(blabla) // TODO
-//        var maze = makeUpwardCorner()
-        var maze = service!!.getServiceMaze();
+        var maze = makeEight()
+//        var maze = service!!.getServiceMaze();
         val renderer = Renderer(imageView, resources)
         var overlord = Overlord(renderer, maze)
 
@@ -42,50 +41,35 @@ class MainActivity: AppCompatActivity() {
     }
 }
 
-// TODO: steek in maze service/factory:
-
-fun makeDildo(): Maze {
+fun makeSnake(): Maze {
     val start = Node(0, 0, NodeType.START)
-    val end = Node(1, 0, NodeType.END)
-    val line = Line(start, end)
-    return Maze(0, setOf(line))
+    val n1 = Node(1, 0, NodeType.MIDDLE)
+    val n2 = Node(1, 1, NodeType.MIDDLE)
+    val n3 = Node(0, 1, NodeType.MIDDLE)
+    val n4 = Node(0, 2, NodeType.MIDDLE)
+    val end = Node(1, 2, NodeType.END)
+    val line1 = Line(start, n1)
+    val line2 = Line(n1, n2)
+    val line3 = Line(n2, n3)
+    val line4 = Line(n3, n4)
+    val line5 = Line(n4, end)
+    return Maze(0, setOf(line1, line2, line3, line4, line5))
 }
 
-fun makeXXLDildo(): Maze {
+fun makeEight(): Maze {
     val start = Node(0, 0, NodeType.START)
-    val middle = Node(1, 0, NodeType.MIDDLE)
-    val end = Node(2, 0, NodeType.END)
-    val line1 = Line(start, middle)
-    val line2 = Line(middle, end)
-    return Maze(0, setOf(line1, line2))
+    val n1 = Node(1, 0, NodeType.MIDDLE)
+    val n2 = Node(1, 1, NodeType.MIDDLE)
+    val n3 = Node(0, 1, NodeType.MIDDLE)
+    val n4 = Node(0, 2, NodeType.MIDDLE)
+    val end = Node(1, 2, NodeType.END)
+    val line1 = Line(start, n1)
+    val line2 = Line(n1, n2)
+    val line3 = Line(n2, n3)
+    val line4 = Line(n3, n4)
+    val line5 = Line(n4, end)
+
+    val line6 = Line(start, n3)
+    val line7 = Line(n2, end)
+    return Maze(0, setOf(line1, line2, line3, line4, line5, line6, line7))
 }
-
-fun makeCorner(): Maze {
-    val start = Node(0, 0, NodeType.START)
-    val middle = Node(0, 1, NodeType.MIDDLE)
-    val end = Node(1, 1, NodeType.END)
-    val line1 = Line(start, middle)
-    val line2 = Line(middle, end)
-    return Maze(0, setOf(line1, line2))
-}
-
-fun makeUpwardCorner(): Maze {
-    val start = Node(0, 0, NodeType.START)
-    val middle = Node(0, -1, NodeType.MIDDLE)
-    val end = Node(1, -1, NodeType.END)
-    val line1 = Line(start, middle)
-    val line2 = Line(middle, end)
-    return Maze(0, setOf(line1, line2))
-}
-
-
-
-
-
-//        when(event.action) {
-//            MotionEvent.ACTION_DOWN -> {
-//                println("ACTION_DOWN \nx: $x\ny: $y")
-//            }
-//            MotionEvent.ACTION_MOVE -> {
-//                //println("ACTION_MOVE \nx: $x\ny: $y")
-//            }
