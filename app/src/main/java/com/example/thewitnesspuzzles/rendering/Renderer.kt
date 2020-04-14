@@ -16,9 +16,6 @@ class Renderer(
     private val screenWidth: Int,
     private val screenHeight: Int
 ) {
-    // TODO: vind dit dynamisch via imageView:
-    //private val screenWidth = DisplayMetrics().widthPixels
-    //private val screenHeight = DisplayMetrics().heightPixels
     //private val screenWidth = 1080
     //private val screenHeight = 1580 // !! Omdat er nog een titel banner is !!
     private val colorPalette = ColorPalette()
@@ -65,30 +62,6 @@ class Renderer(
 
     fun getTouched(input: Pair<Float, Float>): Node? {
         return IntersectionCalculator().calculateTouched(nodes, input)
-    }
-}
-
-class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint, var relativeLineRef: Line) {
-    override fun toString(): String {
-        return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}, rline:${relativeLineRef}"
-    }
-}
-
-open class RenderableNode(var paint: Paint, var relativeNodeRef: Node){}
-
-class Circle(var x: Float, var y: Float, var radius: Float, paint: Paint, relativeNodeRef: Node):
-    RenderableNode(paint, relativeNodeRef) {
-    override fun toString(): String {
-        return "RENDERABLE_NODE: x:${x}, y:${y}, radius:${radius}, color:${paint.color}, rnode:${relativeNodeRef}"
-    }
-}
-
-class Rectangle(var left: Float, var top: Float, var right: Float, var bottom: Float,
-                paint: Paint,
-                relativeNodeRef: Node
-): RenderableNode(paint, relativeNodeRef) {
-    override fun toString(): String {
-        return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}, rline:${relativeNodeRef}"
     }
 }
 
