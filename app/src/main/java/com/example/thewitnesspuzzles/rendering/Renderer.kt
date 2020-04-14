@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
-import android.util.DisplayMetrics
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import com.example.thewitnesspuzzles.model.Line
@@ -13,28 +12,30 @@ import com.example.thewitnesspuzzles.model.NodeType
 
 class Renderer(
     private val imageView: ImageView,
-    private val resources: Resources
+    private val resources: Resources,
+    private val screenWidth: Int,
+    private val screenHeight: Int
 ) {
     // TODO: vind dit dynamisch via imageView:
-    //private val screenWidth = DisplayMetrics().widthPixels;
-    //private val screenHeight = DisplayMetrics().heightPixels;
-    private val screenWidth = 1080
-    private val screenHeight = 1580 // !! Omdat er nog een titel banner is !!
-    private val colorPallete = ColorPallete()
+    //private val screenWidth = DisplayMetrics().widthPixels
+    //private val screenHeight = DisplayMetrics().heightPixels
+    //private val screenWidth = 1080
+    //private val screenHeight = 1580 // !! Omdat er nog een titel banner is !!
+    private val colorPalette = ColorPalette()
     private val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
     private val canvas: Canvas = Canvas(bitmap)
     private val converter = PuzzleConverter(
         this.screenWidth,
         this.screenHeight,
-        this.colorPallete
+        this.colorPalette
     )
     private var nodes = listOf<RenderableNode>()
     private var lines = listOf<RenderableLine>()
 
     init {
-        colorPallete.disabledPaint.color = Color.BLACK
-        colorPallete.enabledPaint.color = Color.RED
-        colorPallete.transparantPaint.color = Color.TRANSPARENT
+        colorPalette.disabledPaint.color = Color.BLACK
+        colorPalette.enabledPaint.color = Color.RED
+        colorPalette.transparantPaint.color = Color.TRANSPARENT
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)

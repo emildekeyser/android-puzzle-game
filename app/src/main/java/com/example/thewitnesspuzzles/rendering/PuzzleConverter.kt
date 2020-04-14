@@ -3,13 +3,12 @@ package com.example.thewitnesspuzzles.rendering
 import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
-import kotlin.math.abs
 import kotlin.math.absoluteValue
 
 class PuzzleConverter(
     private val screenWidth: Int,
     private val screenHeight: Int,
-    private val colorPallete: ColorPallete,
+    private val colorPalette: ColorPalette,
     private var absoluteUnit: Float = 0f,
     private var xMove: Float = 0f,
     private var yMove: Float = 0f,
@@ -74,7 +73,7 @@ class PuzzleConverter(
                 bottom = ay2
             }
 
-            val paint = if (line.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
+            val paint = if (line.taken) colorPalette.enabledPaint else colorPalette.disabledPaint
             return RenderableLine(left, top, right, bottom, paint, line)
     }
 
@@ -90,7 +89,7 @@ class PuzzleConverter(
             val (rx, ry) = Pair(node.xPos, node.yPos)
             val ax = (rx * absoluteUnit) + xMove
             val ay = (ry * absoluteUnit) + yMove
-            val paint = if (node.taken) colorPallete.enabledPaint else colorPallete.disabledPaint
+            val paint = if (node.taken) colorPalette.enabledPaint else colorPalette.disabledPaint
             if (node.nodeType == NodeType.END) {
                 val halfSide = startNodeRadius
                 val left = ax - halfSide

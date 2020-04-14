@@ -3,6 +3,7 @@ package com.example.thewitnesspuzzles
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
@@ -21,10 +22,17 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val service = intent.getSerializableExtra("Extra") as? MazeFactory
-
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val width = displayMetrics.widthPixels
+        val height = displayMetrics.heightPixels
+        // This is a test for if we want to keep the actionbar
+        //var defaultHeight = displayMetrics.heightPixels
+        //val height = width - (actionBar?.customView?.height ?: 0)
         var maze = makeEight()
 //        var maze = service!!.getServiceMaze();
-        val renderer = Renderer(imageView, resources)
+        // TODO: change the parameters the renderer receives
+        val renderer = Renderer(imageView, resources, width, height)
         var overlord = Overlord(renderer, maze)
 
         this.imageView.setOnTouchListener(View.OnTouchListener { _, event ->
