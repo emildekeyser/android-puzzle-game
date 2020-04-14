@@ -6,9 +6,13 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatViewInflater
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.AppCompatRatingBar
 import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Maze
 import com.example.thewitnesspuzzles.model.Node
@@ -23,14 +27,15 @@ class MainActivity: AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main)
         val service = intent.getSerializableExtra("Extra") as? MazeFactory
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
-        // TODO: Don't do -75 but calculate the width of the settings bar
-        val height = displayMetrics.heightPixels - 75
-        // This is a test for if we want to keep the actionbar
+        // This way if we want to keep the status bar
+        //val height = displayMetrics.heightPixels - 75
+        val height = displayMetrics.heightPixels
         var maze = makeEight()
 //        var maze = service!!.getServiceMaze();
         // TODO: Possibly not do the width and height here
