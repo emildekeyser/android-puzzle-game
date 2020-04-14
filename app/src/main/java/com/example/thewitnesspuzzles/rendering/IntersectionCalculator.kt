@@ -3,7 +3,7 @@ package com.example.thewitnesspuzzles.rendering
 import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
 
-class IntersctionCalculator {
+class IntersectionCalculator {
     fun calculateTouched(
         nodes: List<RenderableNode>,
         input: Pair<Float, Float>

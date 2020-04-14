@@ -62,7 +62,7 @@ class Renderer(
     }
 
     fun getTouched(input: Pair<Float, Float>): Node? {
-        return IntersctionCalculator().calculateTouched(nodes, input)
+        return IntersectionCalculator().calculateTouched(nodes, input)
     }
 }
 
