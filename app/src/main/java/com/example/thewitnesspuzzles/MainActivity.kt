@@ -1,12 +1,14 @@
 package com.example.thewitnesspuzzles
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Maze
 import com.example.thewitnesspuzzles.model.Node
@@ -14,6 +16,7 @@ import com.example.thewitnesspuzzles.model.NodeType
 import com.example.thewitnesspuzzles.rendering.Renderer
 import com.example.thewitnesspuzzles.service.MazeFactory
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity: AppCompatActivity() {
 
@@ -25,13 +28,12 @@ class MainActivity: AppCompatActivity() {
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
-        val height = displayMetrics.heightPixels
+        // TODO: Don't do -75 but calculate the width of the settings bar
+        val height = displayMetrics.heightPixels - 75
         // This is a test for if we want to keep the actionbar
-        //var defaultHeight = displayMetrics.heightPixels
-        //val height = width - (actionBar?.customView?.height ?: 0)
         var maze = makeEight()
 //        var maze = service!!.getServiceMaze();
-        // TODO: change the parameters the renderer receives
+        // TODO: Possibly not do the width and height here
         val renderer = Renderer(imageView, resources, width, height)
         var overlord = Overlord(renderer, maze)
 
