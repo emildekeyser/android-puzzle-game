@@ -5,5 +5,5 @@ import android.graphics.Paint
 class ColorPalette {
     val disabledPaint = Paint()
     val enabledPaint = Paint()
-    val transparantPaint = Paint()
+    val transparentPaint = Paint()
 }
