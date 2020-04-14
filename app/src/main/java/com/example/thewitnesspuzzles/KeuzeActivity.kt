@@ -15,7 +15,6 @@ class KeuzeActivity: AppCompatActivity() {
 
         level1.setOnClickListener {
             service?.createSmallLineMaze()
-
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Extra", service)
             startActivity(intent)}
