@@ -158,7 +158,7 @@ class MazeFactory: Serializable {
         val start = Node(0,1,NodeType.START)
         val a = Node(0,0,NodeType.MIDDLE)
         val b = Node(2,0,NodeType.MIDDLE)
-        val c = Node(5,0,NodeType.MIDDLE)
+        val c = Node(6,0,NodeType.MIDDLE)
         val d = Node(1,1,NodeType.MIDDLE)
         val e = Node(2,1,NodeType.MIDDLE)
         val f = Node(3,1,NodeType.MIDDLE)
@@ -218,7 +218,6 @@ class MazeFactory: Serializable {
         val linew = Line(u,v)
         val linex = Line(w,x)
         val liney = Line(x,y)
-        val linez = Line(v,z)
         val lineaa = Line(q,af)
         val lineab = Line(af,ag)
         val lineac = Line(ag,aa)
@@ -230,7 +229,7 @@ class MazeFactory: Serializable {
         val lineai = Line(aj,ak)
         val lineaj = Line(aj,ad)
         val lineak = Line(ak,y)
-        maze = Maze(0, setOf(linea,lineb,linec,lined,linee,linef,lineg,lineh,linei,linej,linek,linel,linem,linen,lineo,linep,lineq,liner,lines,linet,lineu,linev,linew,linex,liney,linez,lineaa,lineab,lineac,linead,lineae,lineaf,lineag,lineah,lineai,lineaj,lineak))
+        maze = Maze(0, setOf(linea,lineb,linec,lined,linee,linef,lineg,lineh,linei,linej,linek,linel,linem,linen,lineo,linep,lineq,liner,lines,linet,lineu,linev,linew,linex,liney,lineaa,lineab,lineac,linead,lineae,lineaf,lineag,lineah,lineai,lineaj,lineak))
 
     }
 
