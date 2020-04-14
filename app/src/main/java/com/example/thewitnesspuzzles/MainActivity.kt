@@ -27,12 +27,11 @@ class MainActivity: AppCompatActivity() {
         // This way if we want to keep the status bar
         //val height = displayMetrics.heightPixels - 75
         val height = displayMetrics.heightPixels
-        var maze = service.createEight()
+        val maze = service.createEight()
 //        var maze = service!!.getServiceMaze();
         // TODO: Possibly not do the width and height here
         val renderer = Renderer(imageView, resources, width, height)
-        var overlord = Overlord(renderer, maze)
-
+        val overlord = Overlord(renderer, maze)
         this.imageView.setOnTouchListener(View.OnTouchListener { _, event ->
 //            this.imageView.layoutParams.width = 1080
 //            this.imageView.layoutParams.height = 1920
