@@ -53,7 +53,7 @@ class MenuActivity : AppCompatActivity () {
         keuzebutton.text = "KIES PUZZLE"
         keuzebutton.setOnClickListener {
             //Toast.makeText(this@MenuActivity, "Demoversie voorziet geen extra puzzels", Toast.LENGTH_LONG).show()
-            val intent = Intent(this, KeuzeActivity::class.java)
+            val intent = Intent(this, LevelActivity::class.java)
             intent.putExtra("Extra",service)
             startActivity(intent)
         }
