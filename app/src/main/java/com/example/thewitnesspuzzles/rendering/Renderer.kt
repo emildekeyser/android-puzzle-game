@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
+import android.util.DisplayMetrics
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import com.example.thewitnesspuzzles.model.Line
@@ -11,12 +12,12 @@ import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
 
 class Renderer(
-    val imageView: ImageView,
-    val resources: Resources
+    private val imageView: ImageView,
+    private val resources: Resources
 ) {
     // TODO: vind dit dynamisch via imageView:
-    // val screenWidth = imageView.width
-    // val screenHeight = imageView.height
+    //private val screenWidth = DisplayMetrics().widthPixels;
+    //private val screenHeight = DisplayMetrics().heightPixels;
     private val screenWidth = 1080
     private val screenHeight = 1580 // !! Omdat er nog een titel banner is !!
     private val colorPallete = ColorPallete()
@@ -31,9 +32,9 @@ class Renderer(
     private var lines = listOf<RenderableLine>()
 
     init {
-        colorPallete.disabledPaint.setColor(Color.BLACK)
-        colorPallete.enabledPaint.setColor(Color.RED)
-        colorPallete.transparantPaint.setColor(Color.TRANSPARENT)
+        colorPallete.disabledPaint.color = Color.BLACK
+        colorPallete.enabledPaint.color = Color.RED
+        colorPallete.transparantPaint.color = Color.TRANSPARENT
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
