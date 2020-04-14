@@ -7,16 +7,13 @@ import com.example.thewitnesspuzzles.model.NodeType
 import java.io.Serializable
 
 class MazeService: Serializable {
-    val start = Node(0, 0, NodeType.START)
-    val end = Node(1, 0, NodeType.END)
-    val line = Line(start, end)
-    var maze = Maze(0, setOf(line))
-
-
+    private val start = Node(0, 0, NodeType.START)
+    private val end = Node(1, 0, NodeType.END)
+    private val line = Line(start, end)
+    private var maze = Maze(0, setOf(line))
 
     // kan de functie niet getMaze noemen? geeft een conflict ergens in het domain?
     fun getServiceMaze(): Maze {
-        return maze;
+        return maze
     }
-
 }
