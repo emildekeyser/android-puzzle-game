@@ -40,7 +40,7 @@ class MazeFactory: Serializable {
         maze = Maze(0, setOf(line1, line2))
     }
 
-    fun createMazeone() {
+    fun createLevelOne() {
         val start = Node(0, 0, NodeType.START)
         val einde = Node(4, 4, NodeType.END)
         val na = Node(1,0,NodeType.MIDDLE)
@@ -84,7 +84,7 @@ class MazeFactory: Serializable {
         maze = Maze(0,setOf(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s))
     }
 
-    fun createMazefun() {
+    fun createLevelTwo() {
         val start = Node(0,3,NodeType.START)
         val einde = Node(3,0,NodeType.END)
         val a = Node(1,3,NodeType.MIDDLE)
