@@ -28,6 +28,7 @@ class MainActivity: AppCompatActivity() {
         //val height = displayMetrics.heightPixels - 75
         val height = displayMetrics.heightPixels
         var maze = service.createEight()
+
 //        var maze = service!!.getServiceMaze();
         // TODO: Possibly not do the width and height here
         val renderer = Renderer(imageView, resources, width, height)
