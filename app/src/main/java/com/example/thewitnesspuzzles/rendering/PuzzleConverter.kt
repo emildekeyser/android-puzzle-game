@@ -45,18 +45,18 @@ class PuzzleConverter(
     }
 
     private fun convertLine(line: Line): RenderableLine {
-            var (rx1, ry1) = Pair(line.begin.xPos.toFloat(), line.begin.yPos.toFloat())
-            var (rx2, ry2) = Pair(line.end.xPos.toFloat(), line.end.yPos.toFloat())
+            val (rx1, ry1) = Pair(line.begin.xPos.toFloat(), line.begin.yPos.toFloat())
+            val (rx2, ry2) = Pair(line.end.xPos.toFloat(), line.end.yPos.toFloat())
 
             val ax1 = (rx1 * absoluteUnit) + xMove
             val ay1 = (ry1 * absoluteUnit) + yMove
             val ax2 = (rx2 * absoluteUnit) + xMove
             val ay2 = (ry2 * absoluteUnit) + yMove
 
-            var left:Float
-            var top:Float
-            var right:Float
-            var bottom:Float
+            val left:Float
+            val top:Float
+            val right:Float
+            val bottom:Float
             println(ry1)
             println(ry2)
         // TODO: this needs to be reworked to support diagonal
@@ -90,27 +90,25 @@ class PuzzleConverter(
             val ax = (rx * absoluteUnit) + xMove
             val ay = (ry * absoluteUnit) + yMove
             val paint = if (node.taken) colorPalette.enabledPaint else colorPalette.disabledPaint
-            if (node.nodeType == NodeType.END) {
-                val halfSide = startNodeRadius
-                val left = ax - halfSide
-                val top = ay - halfSide
-                val right = ax + halfSide
-                val bottom = ay + halfSide
-                val absoluteNode = Rectangle(left, top, right, bottom , paint, node)
-                return absoluteNode
-            } else {
-                var r = nodeRadius
-                if (node.nodeType == NodeType.START) {
-                    r = startNodeRadius
-                }
-                val absoluteNode = Circle(ax, ay, r, paint, node)
-                return absoluteNode
+        return if (node.nodeType == NodeType.END) {
+            val halfSide = startNodeRadius
+            val left = ax - halfSide
+            val top = ay - halfSide
+            val right = ax + halfSide
+            val bottom = ay + halfSide
+            Rectangle(left, top, right, bottom , paint, node)
+        } else {
+            var r = nodeRadius
+            if (node.nodeType == NodeType.START) {
+                r = startNodeRadius
             }
+            Circle(ax, ay, r, paint, node)
+        }
     }
 
-    fun unpack(puzzleData: List<Line>): Pair<MutableList<Node>, List<Line>> {
-        var nodes = mutableListOf<Node>()
-        var lines = mutableListOf<Line>()
+    private fun unpack(puzzleData: List<Line>): Pair<MutableList<Node>, List<Line>> {
+        val nodes = mutableListOf<Node>()
+        val lines = mutableListOf<Line>()
         for (relLine in puzzleData){
             lines.add(relLine)
             nodes.add(relLine.begin)
