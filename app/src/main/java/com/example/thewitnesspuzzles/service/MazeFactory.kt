@@ -109,13 +109,15 @@ class MazeFactory: Serializable {
         val k = Line(ng,nl)
         val l = Line(ni,nr)
         val m = Line(nk,no)
-        val n = Line(nl,nf)
+        val n = Line(nl,nm)
         val o = Line(nm,nq)
         val p = Line(nn,no)
-        val q = Line(nf,nq)
+        val q = Line(np,no)
         val r = Line(nn,ns)
         val s = Line(ns,end)
-        maze = Maze(0,setOf(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s))
+        val t = Line(nq,np)
+        val u = Line(nj,nk)
+        maze = Maze(0,setOf(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u))
     }
 
     fun createLevelTwo() {
