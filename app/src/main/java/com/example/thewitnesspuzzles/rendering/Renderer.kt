@@ -35,7 +35,7 @@ class Renderer(
     init {
         colorPalette.disabledPaint.color = Color.BLACK
         colorPalette.enabledPaint.color = Color.RED
-        colorPalette.transparantPaint.color = Color.TRANSPARENT
+        colorPalette.transparentPaint.color = Color.TRANSPARENT
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
