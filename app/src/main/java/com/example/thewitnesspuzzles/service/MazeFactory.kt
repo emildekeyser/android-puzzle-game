@@ -7,9 +7,9 @@ import com.example.thewitnesspuzzles.model.NodeType
 import java.io.Serializable
 
 class MazeFactory: Serializable {
-    val start = Node(0, 0, NodeType.START)
-    val end = Node(1, 0, NodeType.END)
-    val line = Line(start, end)
+    private val start = Node(0, 0, NodeType.START)
+    private val end = Node(1, 0, NodeType.END)
+    private val line = Line(start, end)
     var maze = Maze(0, setOf(line))
 
     fun createSmallLineMaze() {
@@ -40,9 +40,43 @@ class MazeFactory: Serializable {
         maze = Maze(0, setOf(line1, line2))
     }
 
+    fun createSnake(): Maze {
+        val start = Node(0, 0, NodeType.START)
+        val n1 = Node(1, 0, NodeType.MIDDLE)
+        val n2 = Node(1, 1, NodeType.MIDDLE)
+        val n3 = Node(0, 1, NodeType.MIDDLE)
+        val n4 = Node(0, 2, NodeType.MIDDLE)
+        val end = Node(1, 2, NodeType.END)
+        val line1 = Line(start, n1)
+        val line2 = Line(n1, n2)
+        val line3 = Line(n2, n3)
+        val line4 = Line(n3, n4)
+        val line5 = Line(n4, end)
+        return Maze(0, setOf(line1, line2, line3, line4, line5))
+    }
+
+    fun createEight(): Maze {
+        val start = Node(0, 0, NodeType.START)
+        val n1 = Node(1, 0, NodeType.MIDDLE)
+        val n2 = Node(1, 1, NodeType.MIDDLE)
+        val n3 = Node(0, 1, NodeType.MIDDLE)
+        val n4 = Node(0, 2, NodeType.MIDDLE)
+        val end = Node(1, 2, NodeType.END)
+        val line1 = Line(start, n1)
+        val line2 = Line(n1, n2)
+        val line3 = Line(n2, n3)
+        val line4 = Line(n3, n4)
+        val line5 = Line(n4, end)
+
+        val line6 = Line(start, n3)
+        val line7 = Line(n2, end)
+        return Maze(0, setOf(line1, line2, line3, line4, line5, line6, line7))
+    }
+
+
     fun createLevelOne() {
         val start = Node(0, 0, NodeType.START)
-        val einde = Node(4, 4, NodeType.END)
+        val end = Node(4, 4, NodeType.END)
         val na = Node(1,0,NodeType.MIDDLE)
         val nb = Node(2,0,NodeType.MIDDLE)
         val nc = Node(3,0,NodeType.MIDDLE)
@@ -80,13 +114,13 @@ class MazeFactory: Serializable {
         val p = Line(nn,no)
         val q = Line(nf,nq)
         val r = Line(nn,ns)
-        val s = Line(ns,einde)
+        val s = Line(ns,end)
         maze = Maze(0,setOf(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s))
     }
 
     fun createLevelTwo() {
         val start = Node(0,3,NodeType.START)
-        val einde = Node(3,0,NodeType.END)
+        val end = Node(3,0,NodeType.END)
         val a = Node(1,3,NodeType.MIDDLE)
         val b = Node(3,3,NodeType.MIDDLE)
         val c = Node(0,2,NodeType.MIDDLE)
@@ -109,12 +143,12 @@ class MazeFactory: Serializable {
         val linei = Line(c,g)
         val linej = Line(d,h)
         val linek = Line(e,i)
-        val linel = Line(f,einde)
+        val linel = Line(f,end)
         val linem = Line(g,h)
         val linen = Line(h,i)
         val lineo = Line(h,j)
         val linep = Line(i,k)
-        val lineq = Line(k, einde)
+        val lineq = Line(k, end)
         maze = Maze(0, setOf(linea,lineb,linec,lined,linee,linef,lineg,lineh,linei,linej,linek,linel,linem,linen,lineo,linep,lineq))
     }
 
