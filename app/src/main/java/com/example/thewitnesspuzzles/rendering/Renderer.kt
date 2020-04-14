@@ -1,16 +1,14 @@
 package com.example.thewitnesspuzzles.rendering
 
 import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Node
+import com.example.thewitnesspuzzles.model.NodeType
 
 class Renderer(
     val imageView: ImageView,
@@ -53,7 +51,13 @@ class Renderer(
             canvas.drawRect(line.left, line.top, line.right, line.bottom, line.paint)
         }
         for (node in nodes) {
-            canvas.drawCircle(node.x, node.y, node.nodeRadius, node.paint)
+            if (node.relativeNodeRef.nodeType == NodeType.END) {
+                val rect = node as Rectangle
+                canvas.drawRect(rect.left, rect.top, rect.right, rect.bottom, rect.paint)
+            } else {
+                val circle = node as Circle
+                canvas.drawCircle(circle.x, circle.y, circle.radius, circle.paint)
+            }
         }
     }
 
@@ -67,9 +71,22 @@ class RenderableLine(var left: Float, var top: Float, var right: Float, var bott
         return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}, rline:${relativeLineRef}"
     }
 }
-class RenderableNode(var x: Float, var y: Float, var nodeRadius: Float, var paint: Paint, var relativeNodeRef: Node) {
+
+open class RenderableNode(var paint: Paint, var relativeNodeRef: Node){}
+
+class Circle(var x: Float, var y: Float, var radius: Float, paint: Paint, relativeNodeRef: Node):
+    RenderableNode(paint, relativeNodeRef) {
     override fun toString(): String {
-        return "RENDERABLE_NODE: x:${x}, y:${y}, radius:${nodeRadius}, color:${paint.color}, rnode:${relativeNodeRef}"
+        return "RENDERABLE_NODE: x:${x}, y:${y}, radius:${radius}, color:${paint.color}, rnode:${relativeNodeRef}"
+    }
+}
+
+class Rectangle(var left: Float, var top: Float, var right: Float, var bottom: Float,
+                paint: Paint,
+                relativeNodeRef: Node
+): RenderableNode(paint, relativeNodeRef) {
+    override fun toString(): String {
+        return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}, rline:${relativeNodeRef}"
     }
 }
 
