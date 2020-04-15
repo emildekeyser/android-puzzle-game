@@ -27,8 +27,8 @@ class MainActivity: AppCompatActivity() {
         // This way if we want to keep the status bar
         //val height = displayMetrics.heightPixels - 75
         val height = displayMetrics.heightPixels
-        val maze = service.createEight()
-//        var maze = service!!.getServiceMaze();
+//        val maze = service.createEight()
+        var maze = service!!.getServiceMaze();
         // TODO: Possibly not do the width and height here
         val renderer = Renderer(imageView, resources, width, height)
         val overlord = Overlord(renderer, maze)
