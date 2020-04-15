@@ -11,29 +11,28 @@ import com.example.thewitnesspuzzles.model.Node
 import com.example.thewitnesspuzzles.model.NodeType
 
 class Renderer(
-    val imageView: ImageView,
-    val resources: Resources
+    private val imageView: ImageView,
+    private val resources: Resources,
+    private val screenWidth: Int,
+    private val screenHeight: Int
 ) {
-    // TODO: vind dit dynamisch via imageView:
-    // val screenWidth = imageView.width
-    // val screenHeight = imageView.height
-    private val screenWidth = 1080
-    private val screenHeight = 1580 // !! Omdat er nog een titel banner is !!
-    private val colorPallete = ColorPallete()
+    //private val screenWidth = 1080
+    //private val screenHeight = 1580 // !! Omdat er nog een titel banner is !!
+    private val colorPalette = ColorPalette()
     private val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
     private val canvas: Canvas = Canvas(bitmap)
     private val converter = PuzzleConverter(
         this.screenWidth,
         this.screenHeight,
-        this.colorPallete
+        this.colorPalette
     )
     private var nodes = listOf<RenderableNode>()
     private var lines = listOf<RenderableLine>()
 
     init {
-        colorPallete.disabledPaint.setColor(Color.BLACK)
-        colorPallete.enabledPaint.setColor(Color.RED)
-        colorPallete.transparantPaint.setColor(Color.TRANSPARENT)
+        colorPalette.disabledPaint.color = Color.BLACK
+        colorPalette.enabledPaint.color = Color.RED
+        colorPalette.transparentPaint.color = Color.TRANSPARENT
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -62,31 +61,7 @@ class Renderer(
     }
 
     fun getTouched(input: Pair<Float, Float>): Node? {
-        return IntersctionCalculator().calculateTouched(nodes, input)
-    }
-}
-
-class RenderableLine(var left: Float, var top: Float, var right: Float, var bottom: Float, var paint: Paint, var relativeLineRef: Line) {
-    override fun toString(): String {
-        return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}, rline:${relativeLineRef}"
-    }
-}
-
-open class RenderableNode(var paint: Paint, var relativeNodeRef: Node){}
-
-class Circle(var x: Float, var y: Float, var radius: Float, paint: Paint, relativeNodeRef: Node):
-    RenderableNode(paint, relativeNodeRef) {
-    override fun toString(): String {
-        return "RENDERABLE_NODE: x:${x}, y:${y}, radius:${radius}, color:${paint.color}, rnode:${relativeNodeRef}"
-    }
-}
-
-class Rectangle(var left: Float, var top: Float, var right: Float, var bottom: Float,
-                paint: Paint,
-                relativeNodeRef: Node
-): RenderableNode(paint, relativeNodeRef) {
-    override fun toString(): String {
-        return "RENDERABLE_LINE: left:${left}, right:${right}, top:${top}, bottom: ${bottom}, color:${paint.color}, rline:${relativeNodeRef}"
+        return IntersectionCalculator().calculateTouched(nodes, input)
     }
 }
 

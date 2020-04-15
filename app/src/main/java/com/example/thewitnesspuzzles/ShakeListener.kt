@@ -26,7 +26,7 @@ class ShakeListener(private val mContext: Context) : SensorEventListener {
         mShakeListener = listener
     }
 
-    fun resume() {
+    private fun resume() {
         mSensorMgr =
             mContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         if (mSensorMgr == null) {

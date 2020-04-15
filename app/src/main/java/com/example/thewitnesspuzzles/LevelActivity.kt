@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.example.thewitnesspuzzles.service.MazeFactory
 import kotlinx.android.synthetic.main.activity_keuze.*
 
-class KeuzeActivity: AppCompatActivity() {
+class LevelActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +15,6 @@ class KeuzeActivity: AppCompatActivity() {
 
         level1.setOnClickListener {
             service?.createSmallLineMaze()
-
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Extra", service)
             startActivity(intent)}
