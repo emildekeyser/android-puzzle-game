@@ -14,19 +14,19 @@ class LevelActivity: AppCompatActivity() {
         val service = intent.getSerializableExtra("Extra") as? MazeFactory
 
         level1.setOnClickListener {
-            service?.createSmallLineMaze()
+            service?.createLevelOne()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Extra", service)
             startActivity(intent)}
 
         level2.setOnClickListener {
-            service?.createMediumLineMaze()
+            service?.createLevelTwo()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Extra", service)
             startActivity(intent)}
 
         level3.setOnClickListener {
-            service?.createCornerMaze()
+            service?.createLevelThree()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Extra", service)
             startActivity(intent)}
