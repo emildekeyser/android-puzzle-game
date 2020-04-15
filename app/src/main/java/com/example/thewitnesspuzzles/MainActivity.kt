@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity() {
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
