@@ -52,4 +52,29 @@ class Maze(
         return false
         //todo optimise
     }
+
+    fun victorious(): Boolean {
+        return simpleVictory() && dotVictory()
+    }
+
+    private fun dotVictory(): Boolean {
+        var win = true
+        for (l in lines) {
+            if (l.begin.dot) {
+                win = win && l.begin.taken
+            }
+        }
+        return win
+    }
+
+    private fun simpleVictory(): Boolean {
+        for (l in lines) {
+            if ((l.begin.nodeType == NodeType.END && l.begin.taken)
+                || l.end.nodeType == NodeType.END && l.end.taken) {
+                return true
+            }
+        }
+        return false
+    }
+
 }
