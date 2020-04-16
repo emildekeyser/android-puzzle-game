@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".VictoryActivity">
 
+    <Button
+        android:id="@+id/btnterug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginLeft="161dp"
+        android:layout_marginTop="511dp"
+        android:text="Terug"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

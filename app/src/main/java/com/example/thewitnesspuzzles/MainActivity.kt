@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity() {
 
+    private lateinit var service: MazeFactory
     private lateinit var renderer: Renderer
     private lateinit var maze: Maze
 
@@ -26,7 +27,7 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main)
-        val service = intent.getSerializableExtra("Extra") as MazeFactory
+        service = intent.getSerializableExtra("Extra") as MazeFactory
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
@@ -61,6 +62,7 @@ class MainActivity: AppCompatActivity() {
         if (maze.victorious()) {
             println("VICTORY!!!")
             val intent = Intent(this, VictoryActivity::class.java)
+            intent.putExtra("Extra", service)
             startActivity(intent)
         }
     }
