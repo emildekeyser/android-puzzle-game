@@ -1,7 +1,5 @@
 package com.example.thewitnesspuzzles.service
 
-class MazeService {
-=======
 import com.example.thewitnesspuzzles.model.Line
 import com.example.thewitnesspuzzles.model.Maze
 import com.example.thewitnesspuzzles.model.Node

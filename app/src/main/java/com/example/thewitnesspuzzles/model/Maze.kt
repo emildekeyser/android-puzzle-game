@@ -52,4 +52,14 @@ class Maze(
         return false
         //todo optimise
     }
+
+    fun victorious(): Boolean {
+        for (l in lines) {
+            if ((l.begin.nodeType == NodeType.END && l.begin.taken)
+                || l.end.nodeType == NodeType.END && l.end.taken) {
+                return true
+            }
+        }
+        return false
+    }
 }

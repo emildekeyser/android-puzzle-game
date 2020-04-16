@@ -16,9 +16,10 @@ class Overlord(val renderer: Renderer, val maze: Maze) {
 //        maze.update(touched) // TODO
         FAKEupdate(touchedNode, maze)
         renderer.render(maze.getLinesAsList())
-//        if(puzzle.victorious()){ // TODO
+        if(maze.victorious()){
+            println("VICTORY!!!")
 //           // end game // TODO
-//        }
+        }
     }
 
     // always marks node as taken, depends on custom .equals
