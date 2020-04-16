@@ -6,4 +6,5 @@ class ColorPalette {
     val disabledPaint = Paint()
     val enabledPaint = Paint()
     val transparentPaint = Paint()
+    val dotPaint = Paint()
 }

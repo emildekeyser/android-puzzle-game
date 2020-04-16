@@ -33,6 +33,7 @@ class Renderer(
         colorPalette.disabledPaint.color = Color.BLACK
         colorPalette.enabledPaint.color = Color.RED
         colorPalette.transparentPaint.color = Color.TRANSPARENT
+        colorPalette.dotPaint.color = Color.GREEN
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -56,6 +57,12 @@ class Renderer(
             } else {
                 val circle = node as Circle
                 canvas.drawCircle(circle.x, circle.y, circle.radius, circle.paint)
+            }
+
+            if (node.relativeNodeRef.dot && node.relativeNodeRef.nodeType == NodeType.MIDDLE) {
+                val circle = node as Circle
+                val r = circle.radius * 0.5f
+                canvas.drawCircle(circle.x, circle.y, r, colorPalette.dotPaint)
             }
         }
     }
