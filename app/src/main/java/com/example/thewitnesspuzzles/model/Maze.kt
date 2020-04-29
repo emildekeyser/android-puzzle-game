@@ -22,16 +22,17 @@ class Maze(
         for (line in lines) {
             if (line.containsNode(coordinates)) {
                 coordinatesFound = true
-                if (line.begin.hasMatchingCoordinates(coordinates)) selectedNode = line.begin
-                else selectedNode = line.end
+                selectedNode = if (line.begin.hasMatchingCoordinates(coordinates)) line.begin
+                else line.end
                 break
             }
         }
         if (!coordinatesFound) {
             return false
         }
-        if (path.currentNode == null) { // if there is no currentNode make selectedNode it
-            if (selectedNode!!.nodeType.equals(NodeType.START)) { // if it's of typ START
+        if (path.currentNode == null) { // if there is no currentNode, then currentNode will be selectedNode
+            if (selectedNode!!.nodeType == NodeType.START) { // if it's of type START
+                selectedNode.taken = true
                 path.currentNode = selectedNode
                 return true
             }
@@ -41,12 +42,16 @@ class Maze(
             val line = Line(path.currentNode!!, selectedNode) // create Line object
             val reversedLine = line.reverseLine()
             if (path.lines.contains(reversedLine)) { // check if the reversed line has been added
+                path.currentNode!!.taken = false
                 path.lines = path.lines.minus(reversedLine)
                 path.currentNode = reversedLine.begin
                 return true
             }
+            line.taken = true
             path.lines =
                 path.lines.plus(line) // add a Line consisting of the currentNode and the selectedNode
+            selectedNode.taken = true
+            path.currentNode = selectedNode
             return true
         }
         return false
@@ -70,11 +75,10 @@ class Maze(
     private fun simpleVictory(): Boolean {
         for (l in lines) {
             if ((l.begin.nodeType == NodeType.END && l.begin.taken)
-                || l.end.nodeType == NodeType.END && l.end.taken) {
+                || (l.end.nodeType == NodeType.END && l.end.taken)) {
                 return true
             }
         }
         return false
     }
-
 }
