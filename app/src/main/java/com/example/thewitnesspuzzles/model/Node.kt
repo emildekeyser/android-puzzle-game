@@ -19,9 +19,9 @@ class Node(
         if (xPos != other.xPos) return false
         if (yPos != other.yPos) return false
         if (nodeType != other.nodeType) return false
-        // TODO think about this
-//        if (taken != other.taken) return false
-//        if (dot != other.dot) return false
+
+        // if (taken != other.taken) return false
+        // if (dot != other.dot) return false
 
         return true
     }
@@ -33,7 +33,7 @@ class Node(
         return result
     }
 
-    private fun isAdjacent(other: Node): Boolean {
+    fun isDirectlyAdjacent(other: Node): Boolean {
         if (xPos == other.xPos) {
             if ((maxOf(yPos, other.yPos) - minOf(yPos, other.yPos)) == 1)
                 return true
@@ -45,10 +45,10 @@ class Node(
         return false
     }
 
-    fun isReachable(other: Node): Boolean {
-        return isAdjacent(other)
-        //todo adapt reachable to adjust for diagonals and longer lines
-    }
+//    fun isReachable(other: Node): Boolean {
+//        return isDirectlyAdjacent(other)
+//        //todo adapt reachable to adjust for diagonals and longer lines
+//    }
 
     fun hasMatchingCoordinates(coordinates: Pair<Int, Int>): Boolean {
         val (x, y) = coordinates

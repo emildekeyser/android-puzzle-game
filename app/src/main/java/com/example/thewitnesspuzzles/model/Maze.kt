@@ -6,7 +6,7 @@ class Maze(
     val id: Int,
     var lines: Set<Line>,
     var path: Path = Path()
-) : Serializable{
+) : Serializable {
 
     fun getLinesAsList(): List<Line> {
         return lines.toList()
@@ -34,24 +34,28 @@ class Maze(
             }
             return false
         }
-        if (selectedNode!!.isReachable(path.currentNode!!)) { // if the selectedNode can be reached from the current Node
-            val line = Line(path.currentNode!!, selectedNode) // create Line object
-            val reversedLine = line.reverseLine()
-            if (path.lines.contains(reversedLine)) { // check if the reversed line has been added
-                path.currentNode!!.taken = false
-                path.lines = path.lines.minus(reversedLine)
-                path.currentNode = reversedLine.begin
-                return true
-            }
-            line.taken = true
-            path.lines =
-                path.lines.plus(line) // add a Line consisting of the currentNode and the selectedNode
+        if (isReachable(selectedNode!!, path.currentNode!!)) { // if the selectedNode can be reached from the current Node
             selectedNode.taken = true
+            path.pathOfNodes.add(selectedNode)
+
+            val line = Line(path.currentNode!!, selectedNode) // create Line object
+//            val reversedLine = line.reverseLine()
+//            if (path.lines.contains(reversedLine)) { // check if the reversed line has been added
+//                path.currentNode!!.taken = false
+//                path.lines = path.lines.minus(reversedLine)
+//                path.currentNode = reversedLine.begin
+//                return true
+//            }
+            line.taken = true
             path.currentNode = selectedNode
             return true
         }
         return false
-        //todo optimise
+    }
+
+    private fun isReachable(one: Node, other: Node): Boolean {
+        return one.isDirectlyAdjacent(other)
+        //todo adapt reachable to adjust for diagonals and longer lines
     }
 
     fun victorious(): Boolean {
@@ -71,7 +75,8 @@ class Maze(
     private fun simpleVictory(): Boolean {
         for (l in lines) {
             if ((l.begin.nodeType == NodeType.END && l.begin.taken)
-                || (l.end.nodeType == NodeType.END && l.end.taken)) {
+                || (l.end.nodeType == NodeType.END && l.end.taken)
+            ) {
                 return true
             }
         }
