@@ -2,7 +2,10 @@ package com.example.thewitnesspuzzles.model
 
 import java.io.Serializable
 
-class Line(val begin: Node, val end: Node, val dot: Boolean = false, var taken: Boolean = false): Serializable {
+class Line(_one: Node, _other: Node, val dot: Boolean = false, var taken: Boolean = false): Serializable {
+
+    val begin = sortedNodes(_one, _other).first
+    val end = sortedNodes(_one, _other).second
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -11,15 +14,13 @@ class Line(val begin: Node, val end: Node, val dot: Boolean = false, var taken: 
         other as Line
 
         if (begin != other.begin) {
-            if (begin != other.end)
                 return false
         }
         if (end != other.end) {
-            if (end != other.begin)
                 return false
         }
-        // TODO think about this
-        if (taken != other.taken) return false
+
+        // if (taken != other.taken) return false
         if (dot != other.dot) return false
 
         return true
@@ -39,5 +40,10 @@ class Line(val begin: Node, val end: Node, val dot: Boolean = false, var taken: 
 
     fun reverseLine(): Line {
         return Line(end, begin)
+    }
+
+    private fun sortedNodes(one: Node, other: Node): Pair<Node, Node> {
+        val list = listOf(one, other)
+        return list.sortedWith(compareBy({ it.yPos}, { it.xPos })).zipWithNext().first()
     }
 }

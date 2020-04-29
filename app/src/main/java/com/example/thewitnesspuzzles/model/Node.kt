@@ -1,10 +1,6 @@
 package com.example.thewitnesspuzzles.model
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.io.Serializable
-import java.lang.Integer.max
-import java.lang.Integer.min
 
 class Node(
     val xPos: Int,
@@ -37,22 +33,18 @@ class Node(
         return result
     }
 
-    // TODO why is this in domain code, Johan?
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun isAdjacent(other: Node): Boolean {
+    private fun isAdjacent(other: Node): Boolean {
         if (xPos == other.xPos) {
-            if ((max(yPos, other.yPos) - min(yPos, other.yPos)) == 1)
+            if ((maxOf(yPos, other.yPos) - minOf(yPos, other.yPos)) == 1)
                 return true
         }
         if (yPos == other.yPos) {
-            if ((max(xPos, other.xPos) - min(xPos, other.xPos)) == 1)
+            if ((maxOf(xPos, other.xPos) - minOf(xPos, other.xPos)) == 1)
                 return true
         }
         return false
     }
 
-    // TODO why is this in domain code, Johan?
-    @RequiresApi(Build.VERSION_CODES.N)
     fun isReachable(other: Node): Boolean {
         return isAdjacent(other)
         //todo adapt reachable to adjust for diagonals and longer lines
