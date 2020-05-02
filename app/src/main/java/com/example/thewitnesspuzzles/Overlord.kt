@@ -16,7 +16,7 @@ class Overlord(val renderer: Renderer, val maze: Maze) {
     fun gameUpdate(input: Pair<Float, Float>) {
         val touchedNode = renderer.getTouched(input)
         if (touchedNode != null) {
-            maze.updatePath(Pair(touchedNode.xPos, touchedNode.yPos))
+            maze.update(Pair(touchedNode.xPos, touchedNode.yPos))
         }
 //        maze.update(touched) // TODO
         FAKEupdate(touchedNode, maze)

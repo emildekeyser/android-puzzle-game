@@ -2,7 +2,8 @@ package com.example.thewitnesspuzzles.model
 
 import java.io.Serializable
 
-class Line(_one: Node, _other: Node, val dot: Boolean = false, var taken: Boolean = false): Serializable {
+class Line(_one: Node, _other: Node, val dot: Boolean = false, var taken: Boolean = false) :
+    Serializable {
 
     val begin = sortedNodes(_one, _other).first
     val end = sortedNodes(_one, _other).second
@@ -14,10 +15,10 @@ class Line(_one: Node, _other: Node, val dot: Boolean = false, var taken: Boolea
         other as Line
 
         if (begin != other.begin) {
-                return false
+            return false
         }
         if (end != other.end) {
-                return false
+            return false
         }
 
         // if (taken != other.taken) return false
@@ -33,7 +34,14 @@ class Line(_one: Node, _other: Node, val dot: Boolean = false, var taken: Boolea
         return result
     }
 
-    fun containsNode(coordinates: Pair<Int, Int>): Boolean {
+    fun containsBothNodes(_one: Node, _two: Node): Boolean {
+        val nodePair = sortedNodes(_one, _two)
+        var one = nodePair.first
+        var two = nodePair.second
+        return (begin == one && end == two)
+    }
+
+    fun containsNodeCoordinates(coordinates: Pair<Int, Int>): Boolean {
         return begin.hasMatchingCoordinates(coordinates)
                 || end.hasMatchingCoordinates(coordinates)
     }
@@ -44,6 +52,6 @@ class Line(_one: Node, _other: Node, val dot: Boolean = false, var taken: Boolea
 
     private fun sortedNodes(one: Node, other: Node): Pair<Node, Node> {
         val list = listOf(one, other)
-        return list.sortedWith(compareBy({ it.yPos}, { it.xPos })).zipWithNext().first()
+        return list.sortedWith(compareBy({ it.yPos }, { it.xPos })).zipWithNext().first()
     }
 }

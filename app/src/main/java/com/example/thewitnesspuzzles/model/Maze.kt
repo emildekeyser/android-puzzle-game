@@ -8,15 +8,15 @@ class Maze(
     var path: Path = Path()
 ) : Serializable {
 
-    fun getLinesAsList(): List<Line> {
+    fun getLinesAsList(): List<Line> { // returns all lines
         return lines.toList()
     }
 
-    fun updatePath(coordinates: Pair<Int, Int>): Boolean {
+    fun update(coordinates: Pair<Int, Int>): Boolean {
         var coordinatesFound = false
         var selectedNode: Node? = null
         for (line in lines) {
-            if (line.containsNode(coordinates)) {
+            if (line.containsNodeCoordinates(coordinates)) {
                 coordinatesFound = true
                 selectedNode = if (line.begin.hasMatchingCoordinates(coordinates)) line.begin
                 else line.end
@@ -34,11 +34,24 @@ class Maze(
             }
             return false
         }
-        if (isReachable(selectedNode!!, path.currentNode!!)) { // if the selectedNode can be reached from the current Node
-            selectedNode.taken = true
-            path.pathOfNodes.add(selectedNode)
+//        if (isReachable(
+//                selectedNode!!,
+//                path.currentNode!!
+//            )
+//        ) { // if the selectedNode can be reached from the current Node
+        val dummyLine = Line(path.currentNode!!, selectedNode!!) // create Line object
+        val selectedline = lines.find { line -> line == dummyLine }
+        if (selectedline!=null) {
+            if (path.pathOfNodes.add(selectedNode)) {
+                selectedNode!!.taken = true
+                selectedline!!.taken = true
+                path.currentNode = selectedNode
+                return true
+            }
+            return false
+        }
+        return false
 
-            val line = Line(path.currentNode!!, selectedNode) // create Line object
 //            val reversedLine = line.reverseLine()
 //            if (path.lines.contains(reversedLine)) { // check if the reversed line has been added
 //                path.currentNode!!.taken = false
@@ -46,13 +59,11 @@ class Maze(
 //                path.currentNode = reversedLine.begin
 //                return true
 //            }
-            line.taken = true
-            path.currentNode = selectedNode
-            return true
-        }
-        return false
+//        }
+//        return false
     }
 
+    // @Jaron isreachable is eigenlijk niet nodig, want we gaan kijken of ze in de lijnen zijn, en daarom al reachable is
     private fun isReachable(one: Node, other: Node): Boolean {
         return one.isDirectlyAdjacent(other)
         //todo adapt reachable to adjust for diagonals and longer lines
