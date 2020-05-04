@@ -41,12 +41,21 @@ class Maze(
 //        ) { // if the selectedNode can be reached from the current Node
         val dummyLine = Line(path.currentNode!!, selectedNode!!) // create Line object
         val selectedline = lines.find { line -> line == dummyLine }
-        if (selectedline!=null) {
-            if (path.pathOfNodes.add(selectedNode)) {
-                selectedNode!!.taken = true
-                selectedline!!.taken = true
+        if (selectedline != null) {
+            if (selectedline!!.taken) {
+                var currentNode = path.currentNode
+                path.pathOfNodes.remove(currentNode)
                 path.currentNode = selectedNode
+                currentNode!!.taken = false
+                selectedline!!.taken=false
                 return true
+            } else {
+                if (path.pathOfNodes.add(selectedNode)) {
+                    selectedNode!!.taken = true
+                    selectedline!!.taken = true
+                    path.currentNode = selectedNode
+                    return true
+                }
             }
             return false
         }
