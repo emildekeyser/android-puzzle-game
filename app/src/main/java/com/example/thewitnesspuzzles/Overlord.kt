@@ -18,8 +18,8 @@ class Overlord(val renderer: Renderer, val maze: Maze) {
         if (touchedNode != null) {
             maze.update(Pair(touchedNode.xPos, touchedNode.yPos))
         }
-//        maze.update(touched) // TODO
-        FAKEupdate(touchedNode, maze)
+        //maze.update() // TODO
+        //FAKEupdate(touchedNode, maze)
         renderer.render(maze.getLinesAsList())
         if(maze.victorious()){
             println("VICTORY!!!")
