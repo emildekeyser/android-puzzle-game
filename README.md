@@ -1,1 +1,1 @@
-een woordje uitleg
+Publication of Android game we made in school.
